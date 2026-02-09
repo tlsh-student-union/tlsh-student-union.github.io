@@ -1,14 +1,17 @@
-/* 斗六高中學生會 - 禪意石澗 (Zen Stone) */
+/* 斗六高中學生會 - 禪意石澗 (完整保存版) */
 :root {
     --bg-dark: #0A0A0A;      /* 深黑色岩石 */
     --stone-card: #141414;   /* 磨砂石板感 */
-    --zen-warm: #C5B358;     /* 溫潤的古金色，不再是冷冽金屬 */
-    --text-silk: #D1D1D1;    /* 絲綢般的柔白文字 */
-    --text-mist: #777777;    /* 霧氣般的灰色 */
+    --zen-warm: #C5B358;     /* 溫潤古金色 */
+    --text-silk: #D1D1D1;    /* 絲綢柔白 */
+    --text-mist: #777777;    /* 霧氣灰色 */
 }
 
 body {
     background-color: var(--bg-dark);
+    /* 這裡保留了你最喜歡的石材微紋理 */
+    background-image: radial-gradient(circle at center, #161616 0%, #0D0D0D 100%);
+    background-attachment: fixed;
     font-family: "PingFang TC", "Noto Sans TC", serif;
     color: var(--text-silk);
     margin: 0;
@@ -16,12 +19,11 @@ body {
     letter-spacing: 0.08em;
 }
 
-/* 禪意暖光：像螢火或月光在石上滑過 */
+/* 禪意暖光：跟隨滑鼠的月光 */
 #cursor-glow {
     position: fixed;
-    width: 1000px; /* 範圍極大，讓邊緣極其柔和 */
+    width: 1000px;
     height: 1000px;
-    /* 改用 soft-light 模式，增加「包容感」 */
     background: radial-gradient(circle, rgba(197, 179, 88, 0.04) 0%, rgba(197, 179, 88, 0) 70%);
     pointer-events: none;
     z-index: 1;
@@ -39,7 +41,7 @@ h1 {
     font-weight: 200;
     letter-spacing: 20px;
     color: var(--text-silk);
-    margin-bottom: 20px;
+    margin: 0;
 }
 
 .subtitle {
@@ -47,6 +49,7 @@ h1 {
     letter-spacing: 10px;
     font-size: 0.85rem;
     opacity: 0.6;
+    margin-top: 25px;
 }
 
 .container {
@@ -81,7 +84,7 @@ h2::after {
     gap: 50px;
 }
 
-/* 石材卡片：低調、紮實、有溫度 */
+/* 昂貴感石材卡片：保留濕潤反光 */
 .card {
     background: var(--stone-card);
     padding: 60px 45px;
@@ -91,6 +94,17 @@ h2::after {
     color: inherit;
     transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+/* 這是產生「濕潤反光」的關鍵層 */
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%);
 }
 
 .card:hover {
@@ -112,7 +126,7 @@ h2::after {
     font-size: 0.9rem;
 }
 
-/* 標籤：像刻在石頭上的印記 */
+/* 標籤樣式 */
 .category-tag {
     font-size: 0.7rem;
     padding: 2px 10px;
@@ -122,102 +136,33 @@ h2::after {
     opacity: 0.7;
 }
 
-.tag-urgent { color: #A64D4D !important; } /* 暗硃砂紅 */
+.tag-urgent { color: #A64D4D !important; }
 .tag-event { color: var(--zen-warm) !important; }
 .tag-info { color: #555 !important; }
 
-/* 手機版適應 */
+/* --- 以下為新增的「意見箱」樣式，不影響上方代碼 --- */
+.sub-header { padding: 80px 24px 40px; }
+.back-link { color: var(--text-mist); text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: 0.3s; }
+.back-link:hover { color: var(--zen-warm); }
+.opinion-section { max-width: 700px; margin: 0 auto; }
+.zen-box { background: var(--stone-card); padding: 60px; border: 1px solid #1A1A1A; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+.zen-form .form-group { margin-bottom: 35px; }
+.zen-form label { display: block; color: var(--zen-warm); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px; }
+.zen-form input, .zen-form textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+    color: var(--text-silk); padding: 12px 0; font-family: inherit; font-size: 1rem; outline: none; transition: 0.5s;
+}
+.zen-form input:focus, .zen-form textarea:focus { border-bottom-color: var(--zen-warm); }
+.submit-btn {
+    background: transparent; border: 1px solid var(--zen-warm); color: var(--zen-warm);
+    padding: 15px 40px; cursor: pointer; letter-spacing: 5px; font-size: 0.9rem; transition: 0.5s; margin-top: 20px;
+}
+.submit-btn:hover { background: var(--zen-warm); color: var(--bg-dark); }
+
+footer { text-align: center; padding: 100px 24px; color: var(--text-mist); font-size: 0.8rem; }
+
 @media (max-width: 600px) {
     h1 { font-size: 2.2rem; letter-spacing: 8px; }
     .grid { gap: 30px; }
     .card { padding: 40px 30px; }
-}
-/* --- 正副會長室：意見箱專屬樣式 --- */
-
-.sub-header {
-    padding: 80px 24px 40px;
-}
-
-.back-link {
-    color: var(--text-mist);
-    text-decoration: none;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    transition: color 0.3s;
-}
-
-.back-link:hover {
-    color: var(--zen-warm);
-}
-
-.opinion-section {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.zen-box {
-    background: var(--stone-card);
-    padding: 60px;
-    border: 1px solid #1A1A1A;
-    position: relative;
-}
-
-.box-desc {
-    color: var(--text-mist);
-    line-height: 2;
-    margin-bottom: 40px;
-    font-size: 0.95rem;
-}
-
-.zen-form .form-group {
-    margin-bottom: 35px;
-}
-
-.zen-form label {
-    display: block;
-    color: var(--zen-warm);
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-.zen-form input, 
-.zen-form textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #333; /* 像石縫般的細線 */
-    color: var(--text-silk);
-    padding: 12px 0;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.5s;
-    outline: none;
-}
-
-.zen-form input:focus, 
-.zen-form textarea:focus {
-    border-bottom-color: var(--zen-warm);
-}
-
-/* 提交按鈕：水滴匯集感 */
-.submit-btn {
-    background: transparent;
-    border: 1px solid var(--zen-warm);
-    color: var(--zen-warm);
-    padding: 15px 40px;
-    cursor: pointer;
-    letter-spacing: 5px;
-    font-size: 0.9rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.5s;
-    margin-top: 20px;
-}
-
-.submit-btn:hover {
-    background: var(--zen-warm);
-    color: var(--bg-dark);
-    box-shadow: 0 0 30px rgba(197, 179, 88, 0.2);
 }
