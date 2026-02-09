@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斗六高中學生會 | 官方網站</title>
+    <style>
+        /* City Boy 配色方案 */
+        :root {
+            --bg-color: #F9F7F2;   /* 紙張米白 */
+            --navy: #1B365D;       /* 專業深藍 */
+            --accent: #B58D67;     /* 暖木色 */
+            --text-main: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* 高端大氣 Hero 區塊 */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: 3.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* 導覽中心卡片佈局 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            color: var(--navy);
+            border-bottom: 2px solid var(--navy);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            font-size: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(27, 54, 93, 0.1);
+            border-color: var(--navy);
+        }
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            color: var(--navy);
+            font-size: 1.4rem;
+        }
+
+        /* 可愛施工中樣式 */
+        .construction {
+            background-color: #f0f0f0;
+            border: 1px dashed #ccc;
+            opacity: 0.7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .construction::after {
+            content: "COMING SOON";
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .construction p {
+            font-style: italic;
+            color: #999;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>斗六高中學生會</h1>
+        <div class="subtitle">簡約專業 · 凝聚向心力</div>
+    </header>
+
+    <div class="container">
+        <h2>行政部門中心</h2>
+        <div class="grid">
+            <a href="#" class="card"><h3>正副會長室</h3><p>核心決策與校務溝通窗口。</p></a>
+            <a href="#" class="card"><h3>活動部</h3><p>策劃校園生活，創造共同回憶。</p></a>
+            <a href="#" class="card"><h3>公關部</h3><p>對外連結，爭取權益與合作。</p></a>
+            <a href="#" class="card"><h3>美宣部</h3><p>視覺設計，打造斗中品牌美學。</p></a>
+            <a href="#" class="card"><h3>文書部</h3><p>會議紀錄與檔案管理，行政透明化。</p></a>
+            <a href="#" class="card"><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></a>
+        </div>
+
+        <h2>年度核心計畫</h2>
+        <div class="grid">
+            <div class="card construction">
+                <h3>校園交通改善</h3>
+                <p>正在努力搬磚中... 敬請期待！</p>
+            </div>
+            <div class="card construction">
+                <h3>日本交換計畫</h3>
+                <p>正在與日方連線中... 敬請期待！</p>
+            </div>
+            <div class="card construction">
+                <h3>理科資源共享</h3>
+                <p>正在整理筆記中... 敬請期待！</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 國立斗六高級中學學生會. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
