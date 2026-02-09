@@ -120,3 +120,27 @@ footer {
     color: #999;
     font-size: 0.9rem;
 }
+/* --- 手機版專屬微調 [@media] --- */
+@media (max-width: 600px) {
+    header {
+        padding: 60px 20px; /* 縮小手機版的頁首留白 */
+    }
+
+    h1 {
+        font-size: 2.2rem; /* 讓大標題在手機上不要太壓迫 */
+        letter-spacing: 3px;
+    }
+
+    .container {
+        padding: 40px 16px; /* 讓卡片在手機左右的距離稍微縮短，爭取閱讀空間 */
+    }
+
+    .card {
+        padding: 30px 24px; /* 讓卡片內部不要太擠 */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* 縮小手機版的二級標題 */
+        margin-top: 50px;
+    }
+}
