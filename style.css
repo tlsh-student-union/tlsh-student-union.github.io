@@ -165,19 +165,23 @@ body {
     letter-spacing: 2px;
     opacity: 0.6;
 }
-/* --- 禪意光影：滑鼠跟隨效果 --- */
+/* --- 濕潤金屬反光效果 --- */
 #cursor-glow {
     position: fixed;
     top: 0;
     left: 0;
-    width: 600px; /* 光源的大小 */
-    height: 600px;
-    /* 使用徑向漸層，中心是微弱的暖金色，向外擴散消失 */
-    background: radial-gradient(circle, rgba(142, 121, 93, 0.05) 0%, rgba(142, 121, 93, 0) 70%);
+    width: 800px; /* 擴大範圍，讓光影邊緣更柔和 */
+    height: 800px;
+    /* 改用更淡、範圍更廣的枯金色，中心透明度極低 */
+    background: radial-gradient(circle, rgba(142, 121, 93, 0.08) 0%, rgba(142, 121, 93, 0) 75%);
     border-radius: 50%;
-    pointer-events: none; /* 重要：讓滑鼠可以穿透光影，不影響點擊按鈕 */
+    pointer-events: none;
+    z-index: 9999;
+    /* 核心改動：使用 overlay，光影會與底下的黑色石磚紋理融合 */
+    mix-blend-mode: overlay; 
+    /* 增加平滑過渡，產生你說的「水波滑動感」 */
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate(-50%, -50%);
-    z-index: 9999; /* 確保光在最上層 */
-    transition: opacity 0.3s ease;
-    mix-blend-mode: screen; /* 讓光影與黑色背景融合得更自然 */
+    will-change: transform;
+}
 }
