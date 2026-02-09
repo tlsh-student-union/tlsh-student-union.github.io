@@ -77,3 +77,12 @@ h1 {
     border: 1px dashed #ccc;
     opacity: 0.7;
 }
+/* 公告類別標籤的專屬樣式 */
+.category-tag {
+    color: var(--accent);      /* 直接套用我們定義好的暖木色變數 */
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: block;            /* 確保它獨立佔一行 */
+    margin-bottom: 8px;        /* 與下方標題保持一點距離 */
+    text-transform: uppercase; /* 如果有英文會自動轉大寫，增加質感 */
+}
