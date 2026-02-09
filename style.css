@@ -186,3 +186,52 @@ footer {
     .grid { gap: 30px; }
     .card { padding: 40px 30px; }
 }
+/* --- 導航列：石澗幽靜版 --- */
+nav {
+    position: absolute; /* 讓導航浮動在頂部 */
+    top: 50px;
+    right: 80px;        /* 放在右邊，與中間大標題形成空間感 */
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;   /* 徹底消失的圓點 */
+    display: flex;      /* 讓選單變成橫向排列 */
+    gap: 45px;          /* 增加間距，像石頭間的溪流 */
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-dim);   /* 平時呈現苔灰色，隱匿在黑暗中 */
+    font-size: 0.8rem;
+    letter-spacing: 4px;      /* 延續大標題的高質感字距 */
+    transition: var(--transition-zen);
+    font-weight: 300;
+}
+
+nav a:hover {
+    color: var(--accent-gold); /* 觸碰時像金屬微光般發亮 */
+    text-shadow: 0 0 10px rgba(154, 132, 104, 0.5); /* 增加一點濕潤的反光 */
+}
+
+/* 針對頂部左上角那個多出來的連結進行修正 */
+nav a:first-child {
+    display: none; /* 如果你的列表第一個是重複的名稱，可以選擇隱藏它 */
+}
+
+/* 手機版導航自動調整 */
+@media (max-width: 600px) {
+    nav {
+        position: relative;
+        top: 0;
+        right: 0;
+        padding: 20px 0;
+        text-align: center;
+    }
+    nav ul {
+        justify-content: center;
+        gap: 20px;
+    }
+}
