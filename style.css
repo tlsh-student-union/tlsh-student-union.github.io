@@ -1,14 +1,26 @@
-/* 斗六高中學生會 - City Boy 官網最終視覺定義 */
 :root {
-    /* --- 高級導覽列樣式 --- */
+    --bg-color: #F9F7F2;   /* 質感米白 */
+    --navy: #1B365D;       /* 專業深藍 */
+    --accent: #B58D67;     /* 暖木色 */
+    --white: #FFFFFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 導覽列 */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色 */
-    backdrop-filter: blur(10px); /* 毛玻璃效果，像 Apple 官網一樣 */
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 15px 0;
+    padding: 12px 0;
 }
 
 .nav-container {
@@ -22,7 +34,7 @@
 
 .nav-logo {
     font-weight: 900;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--navy);
     text-decoration: none;
     letter-spacing: 2px;
@@ -31,184 +43,97 @@
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 25px;
     margin: 0;
     padding: 0;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #666;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-.nav-links a:hover {
-    color: var(--accent); /* 滑過時變成暖木色 */
-}
+.nav-links a:hover { color: var(--accent); }
 
-/* 手機版導覽列微調 */
-@media (max-width: 600px) {
-    .nav-links {
-        display: none; /* 手機版暫時隱藏複雜選單，保持簡潔 */
-    }
-}
-    --bg-color: #F9F7F2;   /* 質感米白 */
-    --navy: #1B365D;       /* 專業深藍 */
-    --accent: #B58D67;     /* 暖木色 */
-    --white: #FFFFFF;
-}
-
-body {
-    background-color: var(--bg-color);
-    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 24px 80px 24px;
-}
-
+/* 頁首 */
 header {
     background-color: var(--white);
-    padding: 100px 24px;
+    padding: 80px 24px;
     text-align: center;
-    border-bottom: 1px solid #eee;
 }
 
 h1 {
     color: var(--navy);
-    font-size: 3rem;
-    letter-spacing: 6px;
+    font-size: 2.8rem;
+    letter-spacing: 5px;
     margin: 0;
     font-weight: 900;
 }
 
 .subtitle {
     color: var(--accent);
-    margin-top: 15px;
+    margin-top: 10px;
     letter-spacing: 3px;
-    font-weight: 500;
 }
 
-/* 標題裝飾線 - 解決「怪怪的」第一步 */
+/* 內容容器 */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
 h2 {
-    margin-top: 80px;
-    margin-bottom: 35px;
-    font-size: 1.8rem;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    font-size: 1.6rem;
     color: var(--navy);
     border-left: 5px solid var(--accent);
-    padding-left: 18px;
-    letter-spacing: 2px;
+    padding-left: 15px;
 }
 
+/* 卡片網格 */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-/* 卡片內縮與呼吸感優化 */
 .card {
     background: var(--white);
-    padding: 40px;
-    border-radius: 16px;
+    padding: 35px;
+    border-radius: 12px;
     border: 1px solid #eee;
     text-decoration: none;
     color: inherit;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex;
-    flex-direction: column;
+    transition: transform 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--navy);
-    box-shadow: 0 20px 40px rgba(27, 54, 93, 0.1);
-}
+.card:hover { transform: translateY(-5px); border-color: var(--navy); }
 
-/* 膠囊型標籤 - 解決「怪怪的」第二步 */
+/* 標籤 */
 .category-tag {
     font-size: 0.7rem;
     font-weight: 800;
     display: inline-block;
-    align-self: flex-start; /* 讓標籤不會撐滿整行 */
-    margin-bottom: 20px;
-    padding: 5px 14px;
+    padding: 4px 12px;
     border-radius: 50px;
-    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
-.tag-urgent { background-color: #E63946; color: white !important; }
-.tag-event { background-color: var(--navy); color: white !important; }
-.tag-info { background-color: var(--accent); color: white !important; }
+.tag-urgent { background: #E63946; color: white !important; }
+.tag-event { background: var(--navy); color: white !important; }
+.tag-info { background: var(--accent); color: white !important; }
 
-.card h3 {
-    color: var(--navy);
-    margin: 0 0 15px 0;
-    font-size: 1.5rem;
-    font-weight: 900;
-}
+.card h3 { color: var(--navy); margin: 0 0 10px 0; }
+.card p { color: #666; font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
-.card p {
-    color: #666;
-    line-height: 1.7;
-    margin: 0;
-}
+footer { text-align: center; padding: 50px; color: #999; font-size: 0.8rem; }
 
-/* 施工中卡片 */
-.construction {
-    background-color: rgba(230, 230, 230, 0.4);
-    border: 2px dashed #ccc;
-    opacity: 0.8;
-}
-
-footer {
-    text-align: center;
-    padding: 60px 24px;
-    color: #999;
-    font-size: 0.9rem;
-}
-/* --- 平板版專屬微調 (螢幕寬度 601px 到 1024px) --- */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .container {
-        padding: 50px 40px; /* 平板兩側留白多一點，更有高級感 */
-    }
-
-    .grid {
-        gap: 25px; /* 稍微縮小間距，讓兩張卡片看起來更緊湊 */
-    }
-
-    h1 {
-        font-size: 2.6rem; /* 標題介於手機與電腦之間 */
-    }
-}
-/* --- 手機版專屬微調 [@media] --- */
-@media (max-width: 600px) {
-    header {
-        padding: 60px 20px; /* 縮小手機版的頁首留白 */
-    }
-
-    h1 {
-        font-size: 2.2rem; /* 讓大標題在手機上不要太壓迫 */
-        letter-spacing: 3px;
-    }
-
-    .container {
-        padding: 40px 16px; /* 讓卡片在手機左右的距離稍微縮短，爭取閱讀空間 */
-    }
-
-    .card {
-        padding: 30px 24px; /* 讓卡片內部不要太擠 */
-    }
-
-    h2 {
-        font-size: 1.5rem; /* 縮小手機版的二級標題 */
-        margin-top: 50px;
-    }
+/* 平板與手機適應 */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    .nav-links { display: none; } /* 手機版隱藏選單 */
 }
