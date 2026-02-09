@@ -10,13 +10,13 @@
 <body>
 
     <nav class="zen-nav">
-    <ul>
-        <li><a href="#announcements">最新動態</a></li>
-        <li><a href="#departments">行政部門</a></li>
-        <li><a href="merchants.html">特約商家</a></li>
-        <li><a href="feedback.html">意見箱</a></li>
-    </ul>
-</nav>
+        <ul>
+            <li><a href="#announcements">最新動態</a></li>
+            <li><a href="#departments">行政部門</a></li>
+            <li><a href="merchants.html">特約商家</a></li>
+            <li><a href="feedback.html">意見箱</a></li>
+        </ul>
+    </nav>
 
     <header>
         <h1>斗六高中學生會</h1>
@@ -24,19 +24,55 @@
     </header>
 
     <div class="container">
-        <h2>行政部門中心</h2>
+        <h2 id="departments">行政部門中心</h2>
         <div class="grid">
-            <a href="president.html" class="card"><div class="card-body"><h3>正副會長室</h3><p>核心決策與校務溝通窗口。</p></div></a>
-            <a href="activities.html" class="card"><div class="card-body"><h3>活動部</h3><p>策劃校園生活，創造共同回憶。</p></div></a>
-            <a href="public-relations.html" class="card"><div class="card-body"><h3>公關部</h3><p>對外連結，爭取權益與合作。</p></div></a>
-            <a href="design.html" class="card"><div class="card-body"><h3>美宣部</h3><p>視覺設計，打造斗中品牌美學。</p></div></a>
-            <a href="documents.html" class="card"><div class="card-body"><h3>文書部</h3><p>會議紀錄與檔案管理，行政透明化。</p></div></a>
-            <a href="documents.html" class="card"><div class="card-body"><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></div></a>
+            <a href="president.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>正副會長室</h3>
+                    <p>核心決策與校務溝通窗口。</p>
+                </div>
+            </a>
+            <a href="activities.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>活動部</h3>
+                    <p>策劃校園生活，創造共同回憶。</p>
+                </div>
+            </a>
+            <a href="public-relations.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>公關部</h3>
+                    <p>對外連結，爭取權益與合作。</p>
+                </div>
+            </a>
+            <a href="design.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>美宣部</h3>
+                    <p>視覺設計，打造斗中品牌美學。</p>
+                </div>
+            </a>
+            <a href="documents.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>文書部</h3>
+                    <p>會議紀錄與檔案管理，行政透明化。</p>
+                </div>
+            </a>
+            <a href="finance.html" class="card">
+                <div class="status-bar"><span class="status-dot"></span><span>SYSTEM ACTIVE</span></div>
+                <div class="card-body">
+                    <h3>總務部</h3>
+                    <p>財務透明，每一分經費精準運用。</p>
+                </div>
+            </a>
         </div>
 
-        <h2 id="announcement-grid" style="margin-top: 80px;">最新動態</h2>
+        <h2 id="announcements" style="margin-top: 120px;">最新動態</h2>
         <div id="announcement-grid-content" class="grid">
-            <p>正在連線至後台，請稍候...</p>
+            <p style="color: var(--text-dim); letter-spacing: 4px;">正在連線至黑石後台...</p>
         </div>
     </div>
 
@@ -73,13 +109,10 @@
                     const imageUrl = cols[6] ? cols[6].trim() : ''; 
                     const tagClass = `tag-${type}`;
 
-                    const imageHtml = imageUrl 
-                        ? `<div class="card-image"><img src="${imageUrl}" alt="${title}"></div>` 
-                        : `<div class="card-image placeholder"></div>`;
-
+                    // 確保動態生成的公告也符合黑石 2.0 結構
                     const card = `
                         <a href="${link}" class="card">
-                            ${imageHtml}
+                            <div class="status-bar"><span class="status-dot"></span><span>LIVE UPDATE</span></div>
                             <div class="card-body">
                                 <span class="category-tag ${tagClass}">[${category}] ${date}</span>
                                 <h3>${title}</h3>
@@ -92,7 +125,7 @@
             });
         } catch (error) {
             console.error('讀取失敗:', error);
-            document.getElementById('announcement-grid-content').innerHTML = '<p>暫時無法載入公告。</p>';
+            container.innerHTML = '<p>暫時無法載入公告。</p>';
         }
     }
     loadAnnouncements();
