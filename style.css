@@ -23,6 +23,7 @@ body {
     display: block;
 }
 
+
 .card:hover {
     transform: translateY(-5px);
     border-color: var(--navy);
