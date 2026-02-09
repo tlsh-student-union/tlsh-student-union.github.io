@@ -16,18 +16,19 @@
     <div class="container">
         <h2>行政部門中心</h2>
         <div class="grid">
-    <a href="president.html" class="card"><h3>正副會長室</h3><p>核心決策與校務溝通窗口。</p></a>
-    <a href="activities.html" class="card"><h3>活動部</h3><p>策劃校園生活，創造共同回憶。</p></a>
-    <a href="public-relations.html" class="card"><h3>公關部</h3><p>對外連結，爭取權益與合作。</p></a>
-    <a href="design.html" class="card"><h3>美宣部</h3><p>視覺設計，打造斗中品牌美學。</p></a>
-    <a href="documents.html" class="card"><h3>文書部</h3><p>會議紀錄與檔案管理，行政透明化。</p></a>
-    <a href="general-affairs.html"。><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></a>
-</div>
+            <a href="president.html" class="card"><h3>正副會長室</h3><p>核心決策與校務溝通窗口。</p></a>
+            <a href="activities.html" class="card"><h3>活動部</h3><p>策劃校園生活，創造共同回憶。</p></a>
+            <a href="public-relations.html" class="card"><h3>公關部</h3><p>對外連結，爭取權益與合作。</p></a>
+            <a href="design.html" class="card"><h3>美宣部</h3><p>視覺設計，打造斗中品牌美學。</p></a>
+            <a href="documents.html" class="card"><h3>文書部</h3><p>會議紀錄與檔案管理，行政透明化。</p></a>
+            <a href="documents.html" class="card"><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></a>
+        </div>
 
         <h2>最新動態</h2>
-<div id="announcement-grid" class="grid">
-    <p>正在連線至後台，請稍候...</p>
-</div>
+        <div id="announcement-grid" class="grid">
+            <p>正在連線至後台，請稍候...</p>
+        </div>
+
         <h2>年度核心計畫</h2>
         <div class="grid">
             <div class="card construction">
@@ -48,30 +49,42 @@
     <footer>
         &copy; 2026 國立斗六高級中學學生會. All Rights Reserved.
     </footer>
+
 <script>
-    const spreadsheetUrl = '你的連結';
+    const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
 
     async function loadAnnouncements() {
         try {
             const response = await fetch(spreadsheetUrl);
             const data = await response.text();
-            const rows = data.split('\n').slice(1);
+            
+            // 強化版解析邏輯：處理可能出現的空行或格式問題
+            const rows = data.split('\n').filter(row => row.trim() !== '').slice(1);
             const container = document.getElementById('announcement-grid');
+            
+            if (rows.length === 0) {
+                container.innerHTML = '<p>目前尚無最新消息。</p>';
+                return;
+            }
+
             container.innerHTML = ''; 
 
             rows.forEach(row => {
                 const cols = row.split(',');
-                if (cols.length >= 3) {
-                    const category = cols[0];
-                    const title = cols[1];
-                    const content = cols[2];
-                    const date = cols[3];
-                    const link = cols[4] || '#';
+                // 確保至少有標題與內容
+                if (cols.length >= 2) {
+                    const category = cols[0] || '一般';
+                    const title = cols[1] || '無標題';
+                    const content = cols[2] || '';
+                    const date = cols[3] || '';
+                    const link = cols[4] ? cols[4].trim() : '#';
+                    const type = cols[5] ? cols[5].trim().toLowerCase() : 'info';
 
-                    // 這裡就是我們剛才優化的 category-tag 寫法
+                    const tagClass = `tag-${type}`;
+
                     const card = `
                         <a href="${link}" class="card">
-                            <span class="category-tag">[${category}] ${date}</span>
+                            <span class="category-tag ${tagClass}">[${category}] ${date}</span>
                             <h3>${title}</h3>
                             <p>${content}</p>
                         </a>
@@ -80,9 +93,11 @@
                 }
             });
         } catch (error) {
-            console.error('讀取資料失敗:', error);
+            console.error('讀取失敗:', error);
+            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請確認 Google 試算表是否已發佈。</p>';
         }
     }
+
     loadAnnouncements();
 </script>
 </body>
