@@ -1,137 +1,188 @@
-/* 斗六高中學生會 - 2026 數位基地最終防禦樣式 */
+/* 斗六高中學生會 - 最終視覺方案：【黑石禪意 · 寂小風】
+   設計語彙：深淵黑、濕潤石、枯山水、極致留白
+*/
+
 :root {
-    --bg-color: #F9F7F2;
-    --navy: #1B365D;
-    --accent: #B58D67;
-    --white: #FFFFFF;
+    --bg-base: #050505;        /* 深淵底色：像深夜的庭園 */
+    --stone-wet: #111111;     /* 濕潤石板：卡片的基調 */
+    --accent-gold: #9A8468;   /* 枯金：石縫中的微光 */
+    --text-silver: #C0C0C0;   /* 霧銀：像月光灑在石上的文字 */
+    --text-dim: #555555;      /* 苔灰：次要資訊的隱匿感 */
+    --border-line: #1A1A1A;   /* 石縫線 */
+    --transition-zen: 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* 禪意慢速過渡 */
 }
 
-* { box-sizing: border-box; } /* 確保內距不會撐爆寬度 */
-
+/* --- 全域設定 --- */
 body {
-    background-color: var(--bg-color);
-    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background-color: var(--bg-base);
+    font-family: 'Noto Serif TC', serif; /* 高端襯線體 */
+    color: var(--text-silver);
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* 導覽列 */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    /* 玻璃感核心：更透的白色 + 磨砂模糊 */
-    background-color: rgba(255, 255, 255, 0.75); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px); /* 確保 Apple 裝置也美美的 */
-    
-    /* 玻璃邊緣：一道極細的白光 */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-    padding: 12px 0;
-}
-.nav-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px;
-}
-
-.nav-logo { font-weight: 900; font-size: 1.1rem; color: var(--navy); text-decoration: none; letter-spacing: 2px; }
-.nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-.nav-links a {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 8px 16px; /* 增加感應面積 */
-    border-radius: 8px; /* 圓角 */
-    transition: all 0.3s ease;
-}
-
-/* 滑鼠經過時的玻璃特效 */
-.nav-links a:hover {
-    color: var(--navy);
-    background-color: rgba(255, 255, 255, 0.5); /* 淡淡的白色玻璃感 */
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5); /* 內部的反光 */
-    backdrop-filter: blur(5px);
-}
-
-/* 頁首 */
+/* --- 頁首：極致大氣與空間感 --- */
 header {
-    background-color: var(--white);
-    padding: 80px 24px;
+    background-color: var(--bg-base);
+    padding: 160px 24px 100px 24px;
     text-align: center;
+    position: relative;
 }
 
-h1 { color: var(--navy); font-size: 2.8rem; margin: 0; letter-spacing: 5px; font-weight: 900; }
-.subtitle { color: var(--accent); margin-top: 10px; letter-spacing: 3px; }
+h1 {
+    font-size: 4rem;
+    font-weight: 200;      /* 極細體展現高雅感 */
+    letter-spacing: 20px;  /* 寬廣的字距，營造「間」的美學 */
+    color: var(--text-silver);
+    margin: 0;
+    text-indent: 20px;     /* 補償最後一個字的字距偏移 */
+}
 
-/* 容器與網格 */
-.container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy); margin: 50px 0 25px 0; font-size: 1.6rem; }
+.subtitle {
+    color: var(--accent-gold);
+    margin-top: 30px;
+    font-size: 0.85rem;
+    letter-spacing: 12px;
+    font-weight: 400;
+    opacity: 0.7;
+}
 
+/* --- 容器與格狀佈局 --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 120px 40px;
+}
+
+/* 標題：枯山水的橫劃線 */
+h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--accent-gold);
+    margin: 120px 0 60px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-line);
+    letter-spacing: 6px;
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: var(--accent-gold);
+    margin-right: 20px;
+}
+
+/* --- 卡片：濕潤黑石質感 --- */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    align-items: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 60px; /* 拉大間隔，讓每顆「石頭」都有自己的空間 */
 }
 
-/* 🏆 卡片樣式修復 */
 .card {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid #eee;
+    background: var(--stone-wet);
+    padding: 60px 45px;
+    border-radius: 0; /* 完全直角，像手工切割的石板 */
+    border: 1px solid #151515;
     text-decoration: none;
     color: inherit;
-    transition: all 0.4s ease;
+    transition: var(--transition-zen);
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    height: 100%;
-    min-height: 180px;
+}
+
+/* 增加卡片表面的濕潤反光感 */
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(154, 132, 104, 0.3), transparent);
+    opacity: 0;
+    transition: var(--transition-zen);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.8); /* 亮白邊框 */
-    /* 增加一點玻璃的高級發光感 */
-    box-shadow: 0 20px 40px rgba(27, 54, 93, 0.1), 
-                inset 0 0 20px rgba(255, 255, 255, 0.5);
-}
-/* 圖片與縮放 */
-.card-image { width: 100%; height: 200px; overflow: hidden; background-color: #eee; flex-shrink: 0; }
-.card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-.card:hover .card-image img { transform: scale(1.1); }
-.card-image.placeholder { background: linear-gradient(135deg, var(--navy) 0%, #2c4a7c 100%); opacity: 0.1; }
-
-/* 文字內容區 */
-.card-body {
-    padding: 30px; 
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background: #181818;
+    border-color: #333;
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 
-.category-tag { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 50px; margin-bottom: 15px; align-self: flex-start; }
-.tag-urgent { background: #E63946; color: white !important; }
-.tag-event { background: var(--navy); color: white !important; }
-.tag-info { background: var(--accent); color: white !important; }
+.card:hover::before {
+    opacity: 1;
+}
 
-.card h3 { color: var(--navy); margin: 0 0 12px 0; font-size: 1.4rem; font-weight: 800; }
-.card p { color: #666; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.card h3 {
+    color: var(--text-silver);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+    transition: var(--transition-zen);
+}
 
-footer { text-align: center; padding: 80px 24px; color: #999; }
+.card:hover h3 {
+    color: var(--accent-gold);
+}
 
-/* 手機與平板適應 */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    h1 { font-size: 2.2rem; }
-    .grid { gap: 20px; }
-    .card-body { padding: 25px; }
+.card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 2;
+    margin: 0;
+    transition: var(--transition-zen);
+}
+
+.card:hover p {
+    color: var(--text-silver);
+}
+
+/* --- 動態公告標籤：印章風格 --- */
+.category-tag {
+    font-size: 0.65rem;
+    font-weight: 400;
+    display: inline-block;
+    padding: 2px 12px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+    letter-spacing: 2px;
+    align-self: flex-start;
+}
+
+/* 禪意配色 - 低對比但有深度 */
+.tag-urgent { color: #8B0000 !important; border-color: #4A0000; } /* 暗硃砂紅 */
+.tag-event { color: var(--accent-gold) !important; border-color: #4A3F32; } /* 枯金 */
+.tag-info { color: #555 !important; border-color: #222; } /* 苔灰 */
+
+/* --- 年度核心計畫 (特殊裝修) --- */
+.construction {
+    background-color: transparent;
+    border: 1px dashed var(--border-line);
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+/* --- 頁尾 --- */
+footer {
+    text-align: center;
+    padding: 100px 24px;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    border-top: 1px solid var(--border-line);
+}
+
+/* --- 手機版自適應優化 --- */
+@media (max-width: 600px) {
+    header { padding: 100px 20px 60px 20px; }
+    h1 { font-size: 2.2rem; letter-spacing: 10px; }
+    .grid { gap: 30px; }
+    .card { padding: 40px 30px; }
 }
