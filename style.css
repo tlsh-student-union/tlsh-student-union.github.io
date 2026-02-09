@@ -1,187 +1,134 @@
-/* 斗六高中學生會 - 最終視覺總案：【黑石禪意 2.1 · 靜謐】
-   設計哲學：安靜的存在、低對比美學、石縫微光
-*/
-
+/* 斗六高中學生會 - 禪意石澗 (Zen Stone) */
 :root {
-    --bg-base: #080808;        /* 深淵底色 */
-    --stone-card: #121212;     /* 石板卡片色 */
-    --accent-gold: #9A8468;    /* 枯金：石縫微光 */
-    --text-silver: #D1D1D1;    /* 霧銀 */
-    --text-dim: #555555;       /* 苔灰：讓註解更安靜 */
-    --transition-zen: 1s cubic-bezier(0.22, 1, 0.36, 1); /* 更緩慢的過渡 */
+    --bg-dark: #0A0A0A;      /* 深黑色岩石 */
+    --stone-card: #141414;   /* 磨砂石板感 */
+    --zen-warm: #C5B358;     /* 溫潤的古金色，不再是冷冽金屬 */
+    --text-silk: #D1D1D1;    /* 絲綢般的柔白文字 */
+    --text-mist: #777777;    /* 霧氣般的灰色 */
 }
 
-/* --- 全域設定 --- */
 body {
-    background-color: var(--bg-base);
-    font-family: 'Noto Serif TC', serif;
-    color: var(--text-silver);
-    margin: 0; padding: 0;
-    line-height: 2;
-    letter-spacing: 0.12em;
-    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-dark);
+    font-family: "PingFang TC", "Noto Sans TC", serif;
+    color: var(--text-silk);
+    margin: 0;
+    overflow-x: hidden;
+    letter-spacing: 0.08em;
 }
 
-/* --- 導航列：水平絕對對齊 --- */
-.zen-nav {
-    position: absolute;
-    top: 60px; right: 80px;
-    z-index: 10000;
+/* 禪意暖光：像螢火或月光在石上滑過 */
+#cursor-glow {
+    position: fixed;
+    width: 1000px; /* 範圍極大，讓邊緣極其柔和 */
+    height: 1000px;
+    /* 改用 soft-light 模式，增加「包容感」 */
+    background: radial-gradient(circle, rgba(197, 179, 88, 0.04) 0%, rgba(197, 179, 88, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: soft-light; 
 }
 
-.zen-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center; 
-    gap: 45px;
-    margin: 0; padding: 0;
+header {
+    padding: 150px 24px;
+    text-align: center;
 }
 
-.zen-nav a {
-    text-decoration: none;
-    color: var(--text-silver);
-    font-size: 0.8rem;
-    letter-spacing: 4px;
-    font-weight: 300;
-    transition: var(--transition-zen);
+h1 {
+    font-size: 3.5rem;
+    font-weight: 200;
+    letter-spacing: 20px;
+    color: var(--text-silk);
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: var(--zen-warm);
+    letter-spacing: 10px;
+    font-size: 0.85rem;
     opacity: 0.6;
 }
 
-.zen-nav a:hover { color: var(--accent-gold); opacity: 1; }
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    position: relative;
+    z-index: 2;
+}
 
-/* --- 頁首 --- */
-header { padding: 180px 24px 100px 24px; text-align: center; }
-h1 { font-size: 3.8rem; font-weight: 200; letter-spacing: 22px; text-indent: 22px; margin: 0; }
-.subtitle { color: var(--accent-gold); margin-top: 35px; font-size: 0.85rem; letter-spacing: 12px; opacity: 0.5; }
-
-/* --- 內容容器 --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 60px 150px 60px; }
-h2 { font-size: 1.1rem; color: var(--accent-gold); margin: 100px 0 50px 0; border-bottom: 1px solid #1A1A1A; padding-bottom: 15px; letter-spacing: 6px; display: flex; align-items: center; }
-h2::before { content: ""; width: 35px; height: 1px; background: var(--accent-gold); margin-right: 20px; }
-
-/* --- 靜謐狀態標記 (The Quiet Marker) --- */
-.status-bar {
-    display: inline-flex;
+h2 {
+    font-size: 1.2rem;
+    color: var(--zen-warm);
+    margin: 100px 0 40px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 0.6rem;
-    color: var(--text-dim); /* 使用苔灰色，不搶戲 */
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
 }
 
-.status-dot {
-    width: 4px; height: 4px; /* 縮小點的大小 */
-    background-color: var(--accent-gold); /* 綠色改為枯金，與風格統一 */
-    border-radius: 50%;
-    opacity: 0.5;
-    animation: zen-fade 6s infinite ease-in-out; /* 呼吸速度拉長到 6 秒，極度緩慢 */
+h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #333, transparent);
+    margin-left: 20px;
 }
 
-@keyframes zen-fade {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.6; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
 }
 
-/* --- 卡片：濕潤黑石與註解 --- */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; }
-
+/* 石材卡片：低調、紮實、有溫度 */
 .card {
     background: var(--stone-card);
-    padding: 65px 50px;
+    padding: 60px 45px;
+    border-radius: 4px;
     border: 1px solid #1A1A1A;
     text-decoration: none;
     color: inherit;
-    transition: var(--transition-zen);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
 }
 
-/* 行為暗示：VIEW → (滑鼠移入才現形) */
-.card::after {
-    content: "ENTER →"; /* 語氣改為 ENTER，更具歡迎感 */
-    position: absolute;
-    bottom: 35px; right: 45px;
-    font-size: 0.6rem;
-    color: var(--accent-gold);
-    opacity: 0;
-    transition: var(--transition-zen);
-    transform: translateX(-10px);
-    letter-spacing: 2px;
+.card:hover {
+    border-color: #333;
+    background: #181818;
+    transform: translateY(-8px);
 }
 
-.card:hover { background: #181818; border-color: #333; transform: translateY(-8px); }
-.card:hover::after { opacity: 0.8; transform: translateX(0); }
-
-.card h3 { margin: 10px 0 15px 0; font-size: 1.5rem; font-weight: 300; letter-spacing: 2px; }
-.card p { color: var(--text-dim); line-height: 2; margin: 0; font-size: 0.9rem; transition: var(--transition-zen); }
-.card:hover p { color: var(--text-silver); }
-
-/* 標籤：更內斂的印記風格 */
-.category-tag { font-size: 0.6rem; padding: 2px 10px; border: 1px solid #222; margin-bottom: 25px; display: inline-block; color: var(--text-dim); }
-.tag-urgent { color: #600 !important; border-color: #300; }
-
-footer { text-align: center; padding: 120px 24px; color: #222; font-size: 0.7rem; letter-spacing: 4px; }
-
-@media (max-width: 600px) {
-    header { padding: 100px 20px; }
-    h1 { font-size: 2rem; letter-spacing: 10px; }
-    .zen-nav { position: relative; top: 0; right: 0; padding: 40px 0; text-align: center; }
-    .zen-nav ul { justify-content: center; gap: 20px; }
-}
-/* --- 黑石禪意·極致拋光 --- */
-
-/* 1. 模擬石材微紋理：利用漸層製造極細微的質感 */
-body {
-    background-image: radial-gradient(circle at center, #161616 0%, #0D0D0D 100%);
-    background-attachment: fixed;
-}
-
-/* 2. 讓卡片更有「昂貴石板」的立體感 */
-.card {
-    border: 1px solid rgba(255, 255, 255, 0.05); /* 極細的邊框線 */
-    box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.05), /* 頂部的微反光 */
-        0 20px 40px rgba(0, 0, 0, 0.8);             /* 深沉的陰影 */
-    backdrop-filter: blur(10px);                    /* 加上一點點毛玻璃感 */
-}
-
-/* 3. 優化文字層次：標題加亮、內容柔和 */
 .card h3 {
-    color: #FFFFFF; /* 讓標題像在暗處發光 */
-    text-shadow: 0 0 20px rgba(142, 121, 93, 0.3); /* 輕微的枯金色光暈 */
+    color: var(--text-silk);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 20px;
 }
 
 .card p {
-    color: #888888; /* 內容維持低調的灰 */
-    font-weight: 300;
+    color: var(--text-mist);
+    line-height: 2.2;
+    font-size: 0.9rem;
 }
 
-/* 4. 修改「SYSTEM ACTIVE」這種標籤的顏色，讓它更融入禪意 */
-.card span {
-    letter-spacing: 2px;
-    opacity: 0.6;
+/* 標籤：像刻在石頭上的印記 */
+.category-tag {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border: 1px solid currentColor;
+    margin-bottom: 25px;
+    display: inline-block;
+    opacity: 0.7;
 }
-/* --- 濕潤金屬反光效果 --- */
-#cursor-glow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 800px; /* 擴大範圍，讓光影邊緣更柔和 */
-    height: 800px;
-    /* 改用更淡、範圍更廣的枯金色，中心透明度極低 */
-    background: radial-gradient(circle, rgba(142, 121, 93, 0.08) 0%, rgba(142, 121, 93, 0) 75%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    /* 核心改動：使用 overlay，光影會與底下的黑色石磚紋理融合 */
-    mix-blend-mode: overlay; 
-    /* 增加平滑過渡，產生你說的「水波滑動感」 */
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-    transform: translate(-50%, -50%);
-    will-change: transform;
-}
+
+.tag-urgent { color: #A64D4D !important; } /* 暗硃砂紅 */
+.tag-event { color: var(--zen-warm) !important; }
+.tag-info { color: #555 !important; }
+
+/* 手機版適應 */
+@media (max-width: 600px) {
+    h1 { font-size: 2.2rem; letter-spacing: 8px; }
+    .grid { gap: 30px; }
+    .card { padding: 40px 30px; }
 }
