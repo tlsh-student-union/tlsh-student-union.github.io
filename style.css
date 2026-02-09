@@ -1,134 +1,154 @@
-/* 斗六高中學生會 - 禪意石澗 最終完美版 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;700&display=swap');
-
-:root {
-    --bg-dark: #0A0A0A;
-    --stone-card: #141414;
-    --zen-warm: #C5B358;
-    --classical-blue: #1A2A44; /* 古典墨藍 */
-    --text-silk: #D1D1D1;      /* 絲綢白 (非死白) */
-    --text-mist: #777777;
-    --font-serif: "Noto Serif TC", serif;
+/* --- 1. 全站基礎設定 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 全站通用地基 */
 body {
-    background-color: var(--bg-dark);
+    background-color: #0A0A0A; /* 深黑底色 */
+    /* 恢復你最愛的石紋質感 */
     background-image: radial-gradient(circle at center, #161616 0%, #0D0D0D 100%);
     background-attachment: fixed;
     font-family: "PingFang TC", "Noto Sans TC", sans-serif;
-    color: var(--text-silk);
-    margin: 0;
-    overflow-x: hidden;
+    color: #D1D1D1; /* 絲綢白，不刺眼 */
+    line-height: 1.6;
     letter-spacing: 0.08em;
 }
 
-/* 慣性跟隨暖光 */
+/* --- 2. 禪意暖光 (鼠標跟隨) --- */
 #cursor-glow {
-    position: fixed; width: 1000px; height: 1000px; z-index: 1; pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    /* 極其微弱的暖光，增加濕潤感 */
     background: radial-gradient(circle, rgba(197, 179, 88, 0.04) 0%, rgba(197, 179, 88, 0) 70%);
-    transform: translate(-50%, -50%); mix-blend-mode: soft-light; 
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: soft-light;
 }
 
-/* ============================================================
-   【主頁大廳專屬：index.html】
-   ============================================================ */
-.home-page header {
-    padding: 150px 24px;
-    text-align: center;
+/* --- 3. 首頁標題區：絕對置中與極細體 --- */
+header {
+    padding-top: 150px;
+    padding-bottom: 80px;
+    text-align: center; /* 確保內容水平居中 */
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: 200; /* 絕對的極細體，這是高級感的來源 */
+    letter-spacing: 20px; /* 寬廣的字距 */
+    color: #D1D1D1;
+    margin-bottom: 25px;
+    /* 修正字距導致的中心點偏差 */
+    padding-left: 20px; 
+}
+
+header .subtitle {
+    font-size: 0.85rem;
+    color: #C5B358; /* 古金色副標 */
+    letter-spacing: 10px;
+    opacity: 0.6;
+}
+
+/* --- 4. 內容容器設定 --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 100px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- 5. 抬頭與橫線裝飾 --- */
+h2 {
+    font-size: 1.2rem;
+    color: #C5B358;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 4px;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
-.home-page h1 {
-    font-size: 3.5rem;
-    font-weight: 200;            /* 恢復極細體細節 */
-    letter-spacing: 20px;
-    color: var(--text-silk);
-    margin: 0;
-    text-indent: 20px;           /* 視覺水平修正 */
+h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #222, transparent);
+    margin-left: 20px;
 }
 
-/* ============================================================
-   【正副會長室專屬：president.html】
-   ============================================================ */
-.office-page .office-header {
-    background-color: var(--classical-blue);
-    padding: 180px 24px;
-    text-align: center;
-    border-bottom: 8px solid #000;
+/* --- 6. 卡片網格排版 --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
 }
 
-.office-page h1 {
-    font-family: var(--font-serif); /* 使用宋體實驗 */
-    font-size: 3.8rem;
-    font-weight: 200;
-    letter-spacing: 18px;
-    color: #FFFFFF;
-    text-indent: 18px;
-}
-
-.office-page .quote-box p {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    line-height: 2.4;
-    font-style: italic;
-    color: #EEE;
-}
-
-/* 會長室專屬：石材按鈕 (連貫性細節) */
-.office-page .submit-btn {
-    background-color: var(--stone-card);
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
-    border: 1px solid var(--zen-warm);
-    color: var(--zen-warm);
-    padding: 16px 50px;
-    letter-spacing: 8px;
-    font-family: var(--font-serif);
-    cursor: pointer;
-    transition: 0.5s;
-}
-
-/* ============================================================
-   【通用組件：卡片與佈局】
-   ============================================================ */
-.container { max-width: 1100px; margin: 0 auto; padding-bottom: 100px; position: relative; z-index: 2; }
-
-h2 {
-    font-size: 1.2rem; color: var(--zen-warm); margin: 100px 0 40px; 
-    font-weight: 300; letter-spacing: 4px; display: flex; align-items: center;
-}
-h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, #222, transparent); margin-left: 20px; }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; }
-
-/* 昂貴石材卡片：濕潤反光細節 */
+/* --- 7. 黑石材質卡片細節 --- */
 .card {
-    background: var(--stone-card); padding: 60px 45px; border-radius: 4px; border: 1px solid #1A1A1A;
-    text-decoration: none; color: inherit; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0 15px 50px rgba(0,0,0,0.5); position: relative; overflow: hidden; display: block;
+    background-color: #141414; /* 磨砂石板感 */
+    padding: 60px 45px;
+    border-radius: 4px;
+    border: 1px solid #1A1A1A;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.8s ease;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
 }
-.card::after { 
-    content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%); 
+
+/* 模擬雨後石材表面的「反光層」 */
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%);
 }
-.card:hover { border-color: #333; background: #181818; transform: translateY(-8px); }
 
-.card h3 { color: var(--text-silk); font-size: 1.4rem; margin-bottom: 20px; }
-.card p { color: var(--text-mist); line-height: 2.2; font-size: 0.9rem; }
-
-/* 標籤樣式 */
-.category-tag { font-size: 0.7rem; padding: 2px 10px; border: 1px solid currentColor; margin-bottom: 25px; display: inline-block; opacity: 0.7; }
-.tag-urgent { color: #A64D4D !important; }
-
-/* 意見箱細節 */
-.zen-box { background: var(--stone-card); padding: 60px; border: 1px solid #1A1A1A; }
-.zen-form input, .zen-form textarea {
-    width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
-    color: var(--text-silk); padding: 12px 0; font-family: inherit; outline: none; transition: 0.5s;
+.card:hover {
+    border-color: #333;
+    background-color: #181818;
+    transform: translateY(-8px);
 }
-.zen-form input:focus, .zen-form textarea:focus { border-bottom-color: var(--zen-warm); }
 
-footer { text-align: center; padding: 100px; color: #333; font-size: 0.8rem; }
-@media (max-width: 600px) { h1 { font-size: 2.2rem; letter-spacing: 8px; } }
+.card h3 {
+    color: #D1D1D1;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.card p {
+    color: #777; /* 霧灰色內容 */
+    line-height: 2.2;
+    font-size: 0.9rem;
+}
+
+/* --- 8. 公告標籤樣式 --- */
+.category-tag {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border: 1px solid currentColor;
+    margin-bottom: 25px;
+    display: inline-block;
+    opacity: 0.7;
+}
+
+.tag-urgent { color: #A64D4D !important; } /* 硃砂紅 */
+
+/* --- 9. 頁尾 --- */
+footer {
+    text-align: center;
+    padding: 100px 0;
+    color: #333;
+    font-size: 0.8rem;
+}
