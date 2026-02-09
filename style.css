@@ -1,4 +1,4 @@
-/* 斗六高中學生會 - 禪意石澗 (視覺分離修正版) */
+/* 斗六高中學生會 - 禪意石澗 最終完美版 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;700&display=swap');
 
 :root {
@@ -6,11 +6,12 @@
     --stone-card: #141414;
     --zen-warm: #C5B358;
     --classical-blue: #1A2A44; /* 古典墨藍 */
-    --text-silk: #D1D1D1;      /* 這是你要的「偏白但不死白」的絲綢色 */
+    --text-silk: #D1D1D1;      /* 絲綢白 (非死白) */
     --text-mist: #777777;
     --font-serif: "Noto Serif TC", serif;
 }
 
+/* 全站通用地基 */
 body {
     background-color: var(--bg-dark);
     background-image: radial-gradient(circle at center, #161616 0%, #0D0D0D 100%);
@@ -18,90 +19,116 @@ body {
     font-family: "PingFang TC", "Noto Sans TC", sans-serif;
     color: var(--text-silk);
     margin: 0;
+    overflow-x: hidden;
     letter-spacing: 0.08em;
 }
 
+/* 慣性跟隨暖光 */
 #cursor-glow {
     position: fixed; width: 1000px; height: 1000px; z-index: 1; pointer-events: none;
     background: radial-gradient(circle, rgba(197, 179, 88, 0.04) 0%, rgba(197, 179, 88, 0) 70%);
     transform: translate(-50%, -50%); mix-blend-mode: soft-light; 
 }
 
-/* --- 核心修正：主頁大廳標題 (恢復輕薄感) --- */
-header h1 {
+/* ============================================================
+   【主頁大廳專屬：index.html】
+   ============================================================ */
+.home-page header {
+    padding: 150px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-page h1 {
     font-size: 3.5rem;
-    font-weight: 200 !important; /* 強制回歸極細體 */
+    font-weight: 200;            /* 恢復極細體細節 */
     letter-spacing: 20px;
-    color: var(--text-silk) !important; /* 恢復不刺眼的絲綢白 */
+    color: var(--text-silk);
     margin: 0;
-    font-family: "PingFang TC", sans-serif; /* 確保主頁不用宋體 */
+    text-indent: 20px;           /* 視覺水平修正 */
 }
 
-header .subtitle {
-    color: var(--zen-warm);
-    letter-spacing: 12px;
-    font-size: 0.85rem;
-    opacity: 0.6;
-    margin-top: 25px;
-}
-
-/* --- 實驗區：正副會長室 (古典藍與宋體) --- */
-.office-header {
+/* ============================================================
+   【正副會長室專屬：president.html】
+   ============================================================ */
+.office-page .office-header {
     background-color: var(--classical-blue);
-    padding: 160px 24px;
+    padding: 180px 24px;
     text-align: center;
     border-bottom: 8px solid #000;
 }
 
-/* 只有在會長室才使用宋體 */
-.office-header h1 {
-    font-family: var(--font-serif) !important;
+.office-page h1 {
+    font-family: var(--font-serif); /* 使用宋體實驗 */
     font-size: 3.8rem;
     font-weight: 200;
     letter-spacing: 18px;
-    color: #FFF !important;
+    color: #FFFFFF;
+    text-indent: 18px;
 }
 
-/* 行政部門中心標題 */
-h2 {
-    font-size: 1.2rem;
-    color: var(--zen-warm);
-    margin: 100px 0 40px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    display: flex;
-    align-items: center;
+.office-page .quote-box p {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 2.4;
+    font-style: italic;
+    color: #EEE;
 }
-h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, #222, transparent); margin-left: 20px; }
 
-/* 卡片與石材細節保持 */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; }
-.card {
-    background: var(--stone-card); padding: 60px 45px; border-radius: 4px; border: 1px solid #1A1A1A;
-    text-decoration: none; color: inherit; transition: 1.2s; position: relative; overflow: hidden; display: block;
-}
-.card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%); }
-.card:hover { border-color: #333; background: #181818; transform: translateY(-8px); }
-
-/* 石材按鈕：保持連貫性 */
-.submit-btn {
+/* 會長室專屬：石材按鈕 (連貫性細節) */
+.office-page .submit-btn {
     background-color: var(--stone-card);
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
     border: 1px solid var(--zen-warm);
     color: var(--zen-warm);
-    padding: 15px 50px;
+    padding: 16px 50px;
     letter-spacing: 8px;
     font-family: var(--font-serif);
     cursor: pointer;
     transition: 0.5s;
 }
-.submit-btn:hover { background: var(--zen-warm); color: #000; }
 
-/* 其餘樣式... */
+/* ============================================================
+   【通用組件：卡片與佈局】
+   ============================================================ */
 .container { max-width: 1100px; margin: 0 auto; padding-bottom: 100px; position: relative; z-index: 2; }
+
+h2 {
+    font-size: 1.2rem; color: var(--zen-warm); margin: 100px 0 40px; 
+    font-weight: 300; letter-spacing: 4px; display: flex; align-items: center;
+}
+h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, #222, transparent); margin-left: 20px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; }
+
+/* 昂貴石材卡片：濕潤反光細節 */
+.card {
+    background: var(--stone-card); padding: 60px 45px; border-radius: 4px; border: 1px solid #1A1A1A;
+    text-decoration: none; color: inherit; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5); position: relative; overflow: hidden; display: block;
+}
+.card::after { 
+    content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%); 
+}
+.card:hover { border-color: #333; background: #181818; transform: translateY(-8px); }
+
+.card h3 { color: var(--text-silk); font-size: 1.4rem; margin-bottom: 20px; }
+.card p { color: var(--text-mist); line-height: 2.2; font-size: 0.9rem; }
+
+/* 標籤樣式 */
 .category-tag { font-size: 0.7rem; padding: 2px 10px; border: 1px solid currentColor; margin-bottom: 25px; display: inline-block; opacity: 0.7; }
-.tag-urgent { color: #A64D4D !important; } .tag-event { color: var(--zen-warm) !important; } .tag-info { color: #555 !important; }
+.tag-urgent { color: #A64D4D !important; }
+
+/* 意見箱細節 */
 .zen-box { background: var(--stone-card); padding: 60px; border: 1px solid #1A1A1A; }
-.zen-form input, .zen-form textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--text-silk); padding: 12px 0; outline: none; transition: 0.5s; }
+.zen-form input, .zen-form textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+    color: var(--text-silk); padding: 12px 0; font-family: inherit; outline: none; transition: 0.5s;
+}
 .zen-form input:focus, .zen-form textarea:focus { border-bottom-color: var(--zen-warm); }
+
 footer { text-align: center; padding: 100px; color: #333; font-size: 0.8rem; }
 @media (max-width: 600px) { h1 { font-size: 2.2rem; letter-spacing: 8px; } }
