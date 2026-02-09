@@ -24,6 +24,10 @@
     <a href="documents.html" class="card"><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></a>
 </div>
 
+        <h2>最新動態</h2>
+<div id="announcement-grid" class="grid">
+    <p>正在連線至後台，請稍候...</p>
+</div>
         <h2>年度核心計畫</h2>
         <div class="grid">
             <div class="card construction">
@@ -44,6 +48,48 @@
     <footer>
         &copy; 2026 國立斗六高級中學學生會. All Rights Reserved.
     </footer>
+<script>
+    // 你的 Google 試算表 CSV 連結
+    const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
 
+    async function loadAnnouncements() {
+        try {
+            const response = await fetch(spreadsheetUrl);
+            const data = await response.text();
+            
+            // 將 CSV 文字轉為陣列（跳過第一列標題）
+            const rows = data.split('\n').slice(1);
+            const container = document.getElementById('announcement-grid');
+            container.innerHTML = ''; // 清空載入中文字
+
+            rows.forEach(row => {
+                const cols = row.split(',');
+                if (cols.length >= 3) {
+                    const category = cols[0]; // 類別
+                    const title = cols[1];    // 標題
+                    const content = cols[2];  // 內容
+                    const date = cols[3];     // 日期
+                    const link = cols[4] || '#'; // 連結
+
+                    // 產生 City Boy 風格卡片
+                    const card = `
+                        <a href="${link}" class="card">
+                            <span style="color: #B58D67; font-size: 0.8rem; font-weight: bold;">[${category}] ${date}</span>
+                            <h3>${title}</h3>
+                            <p>${content}</p>
+                        </a>
+                    `;
+                    container.innerHTML += card;
+                }
+            });
+        } catch (error) {
+            console.error('讀取資料失敗:', error);
+            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請稍後再試。</p>';
+        }
+    }
+
+    // 啟動程式
+    loadAnnouncements();
+</script>
 </body>
 </html>
