@@ -51,6 +51,7 @@
     </footer>
 
 <script>
+    // 1. 定義資料來源連結
     const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
 
     async function loadAnnouncements() {
@@ -58,7 +59,7 @@
             const response = await fetch(spreadsheetUrl);
             const data = await response.text();
             
-            // 強化版解析邏輯：處理可能出現的空行或格式問題
+            // 2. 解析 CSV 資料並排除空行
             const rows = data.split('\n').filter(row => row.trim() !== '').slice(1);
             const container = document.getElementById('announcement-grid');
             
@@ -69,17 +70,18 @@
 
             container.innerHTML = ''; 
 
+            // 3. 遍歷每一列資料並生成卡片
             rows.forEach(row => {
                 const cols = row.split(',');
-                // 確保至少有標題與內容
                 if (cols.length >= 2) {
                     const category = cols[0] || '一般';
                     const title = cols[1] || '無標題';
                     const content = cols[2] || '';
                     const date = cols[3] || '';
                     const link = cols[4] ? cols[4].trim() : '#';
+                    
+                    // 讀取 F 欄 (索引值為 5) 決定顏色分類
                     const type = cols[5] ? cols[5].trim().toLowerCase() : 'info';
-
                     const tagClass = `tag-${type}`;
 
                     const card = `
@@ -93,11 +95,13 @@
                 }
             });
         } catch (error) {
-            console.error('讀取失敗:', error);
-            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請確認 Google 試算表是否已發佈。</p>';
+            // 4. 補回剛才被刪掉的錯誤處理與結尾
+            console.error('讀取資料失敗:', error);
+            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請檢查後台連線。</p>';
         }
     }
 
+    // 啟動程式
     loadAnnouncements();
 </script>
 </body>
