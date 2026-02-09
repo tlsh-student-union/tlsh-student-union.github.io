@@ -1,22 +1,21 @@
-/* 斗六高中學生會 - 視覺總案
-   風格：黑石禪意 (Zen Obsidian)
-   特點：濕潤質感、極致留白、高級金屬點綴
+/* 斗六高中學生會 - 最終視覺總案：【黑石禪意 2.0 · 破曉】
+   視覺目標：高端、深邃、濕潤石材、具備生命力的細節
 */
 
 :root {
-    --bg-base: #050505;        /* 深淵底色 */
-    --stone-wet: #111111;     /* 濕潤石板 */
-    --accent-gold: #9A8468;   /* 枯金 */
-    --text-silver: #D1D1D1;   /* 霧銀 */
-    --text-dim: #666666;      /* 苔灰 */
-    --border-line: #1A1A1A;   /* 石縫線 */
+    --bg-base: #0A0A0A;        /* 1. 稍微拉高的深淵底色，增加深度感 */
+    --stone-card: #151515;     /* 2. 較亮的石板色，讓卡片從黑暗中「浮出來」 */
+    --accent-gold: #9A8468;    /* 枯金：石縫微光 */
+    --text-silver: #D1D1D1;    /* 霧銀：優雅文字 */
+    --text-dim: #666666;       /* 苔灰：低調資訊 */
+    --status-green: #2ECC71;   /* 生命之綠：象徵運作中的呼吸燈 */
     --transition-zen: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --- 全域設定 --- */
 body {
     background-color: var(--bg-base);
-    font-family: 'Noto Serif TC', serif; /* 高端襯線體 */
+    font-family: 'Noto Serif TC', serif; /* 襯線體增加昂貴感 */
     color: var(--text-silver);
     margin: 0;
     padding: 0;
@@ -26,18 +25,18 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 導航列 (Desktop) --- */
+/* --- 導航列 (Navigation) - 徹底修復對齊問題 --- */
 nav {
     position: absolute;
     top: 60px;
     right: 80px;
-    z-index: 9999;
+    z-index: 10000;
 }
 
 nav ul {
-    list-style: none; /* 徹底消失的圓點 */
+    list-style: none; /* 移除圓點 */
     display: flex;
-    align-items: center; /* 確保所有選項水平切齊 */
+    align-items: center; /* 垂直對齊校準 */
     gap: 50px;
     margin: 0;
     padding: 0;
@@ -45,12 +44,12 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: var(--text-silver); 
+    color: var(--text-silver);
     font-size: 0.85rem;
     letter-spacing: 4px;
     font-weight: 300;
     transition: var(--transition-zen);
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 nav a:hover {
@@ -59,10 +58,8 @@ nav a:hover {
     text-shadow: 0 0 15px rgba(154, 132, 104, 0.6);
 }
 
-/* 強制消除 nav 內多餘文字 */
-nav > span, nav > text {
-    display: none !important;
-}
+/* 消除 nav 內雜碎文字 */
+nav > span, nav > text { display: none !important; }
 
 /* --- 頁首 (Header) --- */
 header {
@@ -74,7 +71,7 @@ header {
 h1 {
     font-size: 4.2rem;
     font-weight: 200;
-    letter-spacing: 25px; /* 極致留白 */
+    letter-spacing: 25px; /* 極大字距 */
     color: var(--text-silver);
     margin: 0;
     text-indent: 25px;
@@ -102,7 +99,7 @@ h2 {
     color: var(--accent-gold);
     margin: 150px 0 70px 0;
     padding-bottom: 25px;
-    border-bottom: 1px solid var(--border-line);
+    border-bottom: 1px solid #1A1A1A;
     letter-spacing: 8px;
     display: flex;
     align-items: center;
@@ -116,7 +113,33 @@ h2::before {
     margin-right: 25px;
 }
 
-/* --- 卡片：黑石質感 --- */
+/* --- 呼吸燈狀態列 (Status Bar) --- */
+.status-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--status-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--status-green);
+    animation: zen-pulse 2.5s infinite; /* 呼吸燈特效 */
+}
+
+@keyframes zen-pulse {
+    0% { opacity: 0.3; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+/* --- 卡片：濕潤黑石與行為暗示 --- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -124,10 +147,10 @@ h2::before {
 }
 
 .card {
-    background: var(--stone-wet);
+    background: var(--stone-card);
     padding: 70px 50px;
-    border-radius: 0; /* 俐落直角 */
-    border: 1px solid #181818;
+    border-radius: 0;
+    border: 1px solid #1E1E1E; /* 稍微明顯的石縫線 */
     text-decoration: none;
     color: inherit;
     transition: var(--transition-zen);
@@ -137,63 +160,64 @@ h2::before {
     flex-direction: column;
 }
 
-.card::before {
-    content: "";
+/* 右下角 VIEW 箭頭暗示 (行為暗示) */
+.card::after {
+    content: "VIEW →";
     position: absolute;
-    top: 0; left: 0; right: 0; height: 1.5px;
-    background: linear-gradient(90deg, transparent, rgba(154, 132, 104, 0.4), transparent);
+    bottom: 35px;
+    right: 45px;
+    font-size: 0.65rem;
+    color: var(--accent-gold);
+    letter-spacing: 2px;
     opacity: 0;
-    transition: var(--transition-zen);
+    transition: all 0.6s ease;
+    transform: translateX(-10px);
 }
 
 .card:hover {
-    background: #161616;
-    border-color: #333;
+    background: #1C1C1C;
+    border-color: var(--accent-gold);
     transform: translateY(-12px);
     box-shadow: 0 40px 80px rgba(0,0,0,0.9);
 }
 
-.card:hover::before { opacity: 1; }
+.card:hover::after {
+    opacity: 1;
+    transform: translateX(0); /* 移入時箭頭彈出 */
+}
 
 .card h3 {
     color: var(--text-silver);
     font-size: 1.7rem;
     font-weight: 400;
     margin: 0 0 25px 0;
-    transition: var(--transition-zen);
 }
-
-.card:hover h3 { color: var(--accent-gold); }
 
 .card p {
     color: var(--text-dim);
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 2.2;
-    margin: 0;
+    margin: 0 0 30px 0; /* 為右下角預留空間 */
 }
 
-/* --- 標籤 --- */
+/* --- 動態公告標籤 --- */
 .category-tag {
-    font-size: 0.7rem;
-    padding: 4px 15px;
-    margin-bottom: 35px;
+    font-size: 0.65rem;
+    padding: 3px 12px;
+    margin-bottom: 25px;
     border: 1px solid #333;
     letter-spacing: 3px;
     align-self: flex-start;
 }
 
-.tag-urgent { color: #8B0000 !important; border-color: #5A0000; }
-.tag-event { color: var(--accent-gold) !important; border-color: #4A3F32; }
-.tag-info { color: #555 !important; border-color: #222; }
-
 /* --- 頁尾 --- */
 footer {
     text-align: center;
     padding: 120px 24px;
-    color: #444;
-    font-size: 0.8rem;
+    color: #333;
+    font-size: 0.75rem;
     letter-spacing: 6px;
-    border-top: 1px solid var(--border-line);
+    border-top: 1px solid #111;
 }
 
 /* --- 手機版自適應優化 --- */
@@ -209,8 +233,6 @@ footer {
         text-align: center;
     }
     
-    nav ul {
-        justify-content: center;
-        gap: 20px;
-    }
+    nav ul { justify-content: center; gap: 20px; }
+    .container { padding: 0 24px 80px 24px; }
 }
