@@ -215,19 +215,19 @@ footer {
     header { padding: 120px 20px 80px 20px; }
     h1 { font-size: 2.4rem; letter-spacing: 12px; text-indent: 12px; }
     
-    /* --- 導航列：極致對齊版 --- */
+/* --- 導航列：黑石極致對齊版 --- */
 nav {
     position: absolute;
-    top: 50px;          /* 距離頂部高度 */
-    right: 60px;        /* 距離右邊寬度 */
+    top: 55px;          /* 稍微調低一點點，讓它與標題更有空間感 */
+    right: 60px;
     z-index: 10000;
 }
 
 nav ul {
-    list-style: none;
-    display: flex;      /* 橫向排隊 */
-    align-items: center; /* 垂直方向絕對置中對齊 */
-    gap: 40px;          /* 選項間距保持一致 */
+    list-style: none;   /* 移除所有圓點 */
+    display: flex;      /* 強制橫向排列 */
+    align-items: center; /* 垂直絕對置中，解決不整齊問題 */
+    gap: 45px;          /* 增加間距，增加「昂貴感」 */
     margin: 0;
     padding: 0;
 }
@@ -236,21 +236,21 @@ nav a {
     text-decoration: none;
     color: var(--text-silver); 
     font-size: 0.85rem;
-    letter-spacing: 4px; /* 質感字距 */
+    letter-spacing: 4px; /* 維持寂小風的質感字距 */
     font-weight: 300;
     transition: var(--transition-zen);
     opacity: 0.7;
-    white-space: nowrap; /* 強制不換行，確保整齊 */
+    white-space: nowrap; /* 確保文字在手機上也不會亂跑換行 */
 }
 
 nav a:hover {
     color: var(--accent-gold);
     opacity: 1;
-    text-shadow: 0 0 12px rgba(154, 132, 104, 0.5);
+    text-shadow: 0 0 15px rgba(154, 132, 104, 0.4);
 }
 
-/* --- 隱藏那個在選單裡多出來的標題 --- */
-/* 如果你的 HTML 裡 nav 第一個元素是文字而不是連結，這行會幫你清理它 */
-nav > text, nav > span {
-    display: none;
+/* --- 強制消除那個多出來的抬頭文字 --- */
+/* 這行會幫你把 nav 裡面非連結的雜碎文字通通藏起來 */
+nav > span, nav > div:not(ul) {
+    display: none !important;
 }
