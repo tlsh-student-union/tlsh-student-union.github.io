@@ -1,0 +1,36 @@
+/* 斗六高中學生會 - 全站視覺基準 (City Boy Style) */
+:root {
+    --bg-color: #F9F7F2;   /* 紙張米白 */
+    --navy: #1B365D;       /* 專業深藍 */
+    --accent: #B58D67;     /* 暖木色 */
+    --white: #FFFFFF;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    margin: 0;
+}
+
+/* 統一的卡片設計，所有部門共用 */
+.card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #EAEAEA;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    display: block;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--navy);
+}
+
+/* 施工中專用樣式 */
+.under-construction {
+    background-color: #F0F0F0;
+    opacity: 0.6;
+    border: 1px dashed #999;
+}
