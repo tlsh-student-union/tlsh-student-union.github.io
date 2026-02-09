@@ -3,70 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>斗六高中學生會 | 禪意石澗</title>
+    <title>斗六高中學生會 | 官方網站</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="cursor-glow"></div>
+
     <header>
         <h1>斗六高中學生會</h1>
         <div class="subtitle">凝靜 · 凝聚 · 向心力</div>
     </header>
+
     <div class="container">
         <h2>行政部門中心</h2>
         <div class="grid">
-            <a href="president.html" class="card"><h3>正副會長室</h3><p>核心決策與校務溝通窗口。</p></a>
-            <a href="activities.html" class="card"><h3>活動部</h3><p>策劃校園生活，創造共同回憶。</p></a>
-            <a href="public-relations.html" class="card"><h3>公關部</h3><p>對外連結，爭取權益與合作。</p></a>
-            <a href="design.html" class="card"><h3>美宣部</h3><p>視覺設計，打造斗中品牌美學。</p></a>
-            <a href="documents.html" class="card"><h3>文書部</h3><p>會議紀錄與檔案管理。</p></a>
-            <a href="total-affairs.html" class="card"><h3>總務部</h3><p>財務透明，經費精準運用。</p></a>
+            <a href="president.html" class="card">
+                <h3>正副會長室</h3>
+                <p>核心決策與校務溝通窗口。</p>
+            </a>
+            <a href="activities.html" class="card">
+                <h3>活動部</h3>
+                <p>策劃校園生活，創造共同回憶。</p>
+            </a>
+            <a href="public-relations.html" class="card">
+                <h3>公關部</h3>
+                <p>對外連結，爭取權益與合作。</p>
+            </a>
         </div>
 
         <h2>最新動態</h2>
         <div id="announcement-grid" class="grid">
-            <p>正在連線至後台，請稍候...</p>
+            <p>正在連線至石澗後台...</p>
         </div>
     </div>
+
     <footer>&copy; 2026 國立斗六高級中學學生會.</footer>
 
     <script>
+        // 1. 公告讀取邏輯
         const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
-        async function loadAnnouncements() {
+        async function loadData() {
             try {
-                const response = await fetch(spreadsheetUrl);
-                const data = await response.text();
-                const rows = data.split('\n').filter(row => row.trim() !== '').slice(1);
+                const res = await fetch(spreadsheetUrl);
+                const data = await res.text();
+                const rows = data.split('\n').filter(r => r.trim() !== '').slice(1);
                 const container = document.getElementById('announcement-grid');
-                container.innerHTML = ''; 
+                container.innerHTML = '';
                 rows.forEach(row => {
                     const cols = row.split(',');
                     if (cols.length >= 2) {
-                        const category = cols[0] || '一般';
-                        const title = cols[1] || '無標題';
-                        const content = cols[2] || '';
-                        const date = cols[3] || '';
-                        const link = cols[4] ? cols[4].trim() : '#';
-                        const type = (cols[5] || 'info').trim().toLowerCase();
-                        container.innerHTML += `
-                            <a href="${link}" class="card">
-                                <span class="category-tag tag-${type}">[${category}] ${date}</span>
-                                <h3>${title}</h3><p>${content}</p>
+                        const card = `
+                            <a href="${cols[4] || '#'}" class="card">
+                                <span class="category-tag tag-${(cols[5]||'info').trim().toLowerCase()}">[${cols[0]}] ${cols[3]}</span>
+                                <h3>${cols[1]}</h3>
+                                <p>${cols[2]}</p>
                             </a>`;
+                        container.innerHTML += card;
                     }
                 });
             } catch (e) { console.error(e); }
         }
-        // 禪意光影邏輯
+
+        // 2. 光影移動邏輯
         const glow = document.getElementById('cursor-glow');
         let mx = 0, my = 0, bx = 0, by = 0;
         document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
-        function anim() {
-            bx += (mx - bx) * 0.08; by += (my - by) * 0.08;
-            glow.style.left = bx + 'px'; glow.style.top = by + 'px';
-            requestAnimationFrame(anim);
+        function animate() {
+            bx += (mx - bx) * 0.08;
+            by += (my - by) * 0.08;
+            glow.style.left = bx + 'px';
+            glow.style.top = by + 'px';
+            requestAnimationFrame(animate);
         }
-        anim(); loadAnnouncements();
+        animate(); loadData();
     </script>
 </body>
 </html>
