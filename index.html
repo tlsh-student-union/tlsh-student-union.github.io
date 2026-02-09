@@ -49,47 +49,40 @@
         &copy; 2026 國立斗六高級中學學生會. All Rights Reserved.
     </footer>
 <script>
-    // 你的 Google 試算表 CSV 連結
-    const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
+    const spreadsheetUrl = '你的連結';
 
     async function loadAnnouncements() {
         try {
             const response = await fetch(spreadsheetUrl);
             const data = await response.text();
-            
-            // 將 CSV 文字轉為陣列（跳過第一列標題）
             const rows = data.split('\n').slice(1);
             const container = document.getElementById('announcement-grid');
-            container.innerHTML = ''; // 清空載入中文字
+            container.innerHTML = ''; 
 
             rows.forEach(row => {
                 const cols = row.split(',');
                 if (cols.length >= 3) {
-                    const category = cols[0]; // 類別
-                    const title = cols[1];    // 標題
-                    const content = cols[2];  // 內容
-                    const date = cols[3];     // 日期
-                    const link = cols[4] || '#'; // 連結
+                    const category = cols[0];
+                    const title = cols[1];
+                    const content = cols[2];
+                    const date = cols[3];
+                    const link = cols[4] || '#';
 
-                    // 產生 City Boy 風格卡片
-                    c// 產生 City Boy 風格卡片 (已優化樣式管理)
-const card = `
-    <a href="${link}" class="card">
-        <span class="category-tag">[${category}] ${date}</span>
-        <h3>${title}</h3>
-        <p>${content}</p>
-    </a>
-`;
+                    // 這裡就是我們剛才優化的 category-tag 寫法
+                    const card = `
+                        <a href="${link}" class="card">
+                            <span class="category-tag">[${category}] ${date}</span>
+                            <h3>${title}</h3>
+                            <p>${content}</p>
+                        </a>
+                    `;
                     container.innerHTML += card;
                 }
             });
         } catch (error) {
             console.error('讀取資料失敗:', error);
-            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請稍後再試。</p>';
         }
     }
-
-    // 啟動程式
     loadAnnouncements();
 </script>
 </body>
