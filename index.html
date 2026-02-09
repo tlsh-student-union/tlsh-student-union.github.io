@@ -131,18 +131,21 @@
         }
     }
     loadAnnouncements();
-    // --- 滑鼠光影追蹤邏輯 ---
+    // --- 進化版：帶有慣性的光影追蹤 ---
 const glow = document.getElementById('cursor-glow');
+let mouseX = 0;
+let mouseY = 0;
 
 document.addEventListener('mousemove', (e) => {
-    // 讓光影中心隨著滑鼠座標移動
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
+    // 取得當前滑鼠座標
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // 使用 requestAnimationFrame 讓效能更好且更絲滑
+    requestAnimationFrame(() => {
+        glow.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    });
 });
 
-// 當滑鼠離開視窗時，把光藏起來
 document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
 document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
-</script>
-</body>
-</html>
