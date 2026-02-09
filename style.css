@@ -132,3 +132,92 @@ h2::after {
     .grid { gap: 30px; }
     .card { padding: 40px 30px; }
 }
+/* --- 正副會長室：意見箱專屬樣式 --- */
+
+.sub-header {
+    padding: 80px 24px 40px;
+}
+
+.back-link {
+    color: var(--text-mist);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--zen-warm);
+}
+
+.opinion-section {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.zen-box {
+    background: var(--stone-card);
+    padding: 60px;
+    border: 1px solid #1A1A1A;
+    position: relative;
+}
+
+.box-desc {
+    color: var(--text-mist);
+    line-height: 2;
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+}
+
+.zen-form .form-group {
+    margin-bottom: 35px;
+}
+
+.zen-form label {
+    display: block;
+    color: var(--zen-warm);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.zen-form input, 
+.zen-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #333; /* 像石縫般的細線 */
+    color: var(--text-silk);
+    padding: 12px 0;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.5s;
+    outline: none;
+}
+
+.zen-form input:focus, 
+.zen-form textarea:focus {
+    border-bottom-color: var(--zen-warm);
+}
+
+/* 提交按鈕：水滴匯集感 */
+.submit-btn {
+    background: transparent;
+    border: 1px solid var(--zen-warm);
+    color: var(--zen-warm);
+    padding: 15px 40px;
+    cursor: pointer;
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: var(--zen-warm);
+    color: var(--bg-dark);
+    box-shadow: 0 0 30px rgba(197, 179, 88, 0.2);
+}
