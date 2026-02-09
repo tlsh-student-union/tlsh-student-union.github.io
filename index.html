@@ -72,24 +72,28 @@
         const date = cols[3] || '';
         const link = cols[4] ? cols[4].trim() : '#';
         const type = cols[5] ? cols[5].trim().toLowerCase() : 'info';
-        
-        // --- 核心改動：讀取第 7 欄 (G欄) 的圖片網址 ---
         const imageUrl = cols[6] ? cols[6].trim() : ''; 
         const tagClass = `tag-${type}`;
 
-        // 如果有圖片網址，就產生圖片標籤；沒有的話就留空
-        const imageHtml = imageUrl ? `<div class="card-image"><img src="${imageUrl}" alt="${title}"></div>` : '';
+        // 修改這裡：如果沒有圖片網址，就套用一個 placeholder 樣式
+        const imageHtml = imageUrl 
+            ? `<div class="card-image"><img src="${imageUrl}" alt="${title}"></div>` 
+            : `<div class="card-image placeholder"></div>`; // 沒照片時顯示色塊
 
         const card = `
             <a href="${link}" class="card">
                 ${imageHtml}
-                <div class="card-content">
+                <div class="card-body">
                     <span class="category-tag ${tagClass}">[${category}] ${date}</span>
                     <h3>${title}</h3>
                     <p>${content}</p>
                 </div>
             </a>
         `;
+        container.innerHTML += card;
+    }
+});
+    
         container.innerHTML += card;
     }
 });
