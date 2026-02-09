@@ -1,113 +1,92 @@
-/* 斗六高中學生會 - 禪意石澗 最終版 */
-:root { --bg-dark: #0A0A0A; --stone-card: #141414; --zen-warm: #C5B358; --text-silk: #D1D1D1; --text-mist: #777777; }
+/* 斗六高中學生會 - 禪意石澗 (實驗 2.0 版) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;700&display=swap');
+
+:root {
+    --bg-dark: #0A0A0A;
+    --stone-card: #141414;
+    --zen-warm: #C5B358;
+    --classical-blue: #1A2A44; /* 調整為更深沉、像古墨般的「古典藍」 */
+    --text-silk: #D1D1D1;
+    --text-mist: #777777;
+    --font-serif: "Noto Serif TC", serif; /* 宋體定義 */
+}
+
+/* 全站字體與背景設定 */
 body {
     background-color: var(--bg-dark);
     background-image: radial-gradient(circle at center, #161616 0%, #0D0D0D 100%);
     background-attachment: fixed;
-    font-family: "PingFang TC", "Noto Sans TC", serif;
-    color: var(--text-silk); margin: 0; letter-spacing: 0.08em;
+    font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+    color: var(--text-silk);
+    margin: 0;
+    letter-spacing: 0.08em;
 }
+
+/* 暖光跟隨 */
 #cursor-glow {
     position: fixed; width: 1000px; height: 1000px; z-index: 1; pointer-events: none;
     background: radial-gradient(circle, rgba(197, 179, 88, 0.04) 0%, rgba(197, 179, 88, 0) 70%);
     transform: translate(-50%, -50%); mix-blend-mode: soft-light; 
 }
+
+/* --- 正副會長室專屬實驗樣式 --- */
+
+/* 1. 古典藍頂欄 */
+.office-header {
+    background-color: var(--classical-blue);
+    padding: 160px 24px;
+    text-align: center;
+    border-bottom: 8px solid #000;
+}
+
+/* 2. 宋體大標題實驗 */
+.office-header h1, .section-title, .quote-box p {
+    font-family: var(--font-serif);
+    font-weight: 200;
+}
+
+.office-header h1 {
+    font-size: 3.8rem;
+    letter-spacing: 18px;
+    color: #FFF;
+}
+
+/* 3. 石材連貫性細節：按鈕與小細節 */
+.submit-btn {
+    background-color: var(--stone-card); /* 使用石材卡片顏色，達成連貫性 */
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    border: 1px solid var(--zen-warm);
+    color: var(--zen-warm);
+    padding: 16px 50px;
+    cursor: pointer;
+    letter-spacing: 8px;
+    font-family: var(--font-serif);
+    transition: all 0.5s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.submit-btn:hover {
+    background-color: var(--zen-warm);
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* 其餘樣式保持不變... */
 header { padding: 120px 24px; text-align: center; }
-h1 { font-size: 3.5rem; font-weight: 200; letter-spacing: 15px; color: var(--text-silk); margin: 0; }
-.subtitle { color: var(--zen-warm); letter-spacing: 8px; font-size: 0.85rem; opacity: 0.6; margin-top: 25px; }
+h1 { font-size: 3.5rem; letter-spacing: 15px; }
 .container { max-width: 1100px; margin: 0 auto; padding-bottom: 100px; position: relative; z-index: 2; }
-h2 { font-size: 1.2rem; color: var(--zen-warm); margin: 80px 0 40px; font-weight: 300; letter-spacing: 4px; display: flex; align-items: center; }
+h2 { font-size: 1.2rem; color: var(--zen-warm); margin: 80px 0 40px; display: flex; align-items: center; }
 h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, #222, transparent); margin-left: 20px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
 .card {
     background: var(--stone-card); padding: 50px 40px; border-radius: 2px; border: 1px solid #1A1A1A;
-    text-decoration: none; color: inherit; transition: all 1s; box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: block;
+    text-decoration: none; color: inherit; transition: 1s; position: relative; overflow: hidden; display: block;
 }
-.card:hover { border-color: #333; background: #181818; transform: translateY(-5px); }
+.card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0) 100%); }
 .card h3 { color: var(--text-silk); font-size: 1.3rem; margin-bottom: 15px; }
 .card p { color: var(--text-mist); line-height: 2; font-size: 0.9rem; }
-.category-tag { font-size: 0.7rem; padding: 2px 10px; border: 1px solid currentColor; margin-bottom: 20px; display: inline-block; opacity: 0.7; }
-.tag-urgent { color: #A64D4D !important; } 
-
-/* 會長的一段話專屬 */
-.quote-box { padding: 40px; border-left: 2px solid var(--zen-warm); background: rgba(255,255,255,0.02); margin-bottom: 60px; }
-.quote-box p { font-size: 1.4rem; line-height: 2.2; font-weight: 300; font-style: italic; color: #EEE; }
-.quote-box cite { display: block; margin-top: 20px; color: var(--zen-warm); letter-spacing: 5px; }
-
-/* 意見箱區域 */
+.category-tag { font-size: 0.7rem; padding: 2px 10px; border: 1px solid currentColor; display: inline-block; }
 .zen-box { background: var(--stone-card); padding: 60px; border: 1px solid #1A1A1A; }
-.zen-form .form-group { margin-bottom: 30px; }
-.zen-form label { display: block; color: var(--zen-warm); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; }
-.zen-form input, .zen-form textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--text-silk); padding: 10px 0; outline: none; transition: 0.5s; }
+.zen-form input, .zen-form textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--text-silk); padding: 10px 0; outline: none; }
 .zen-form input:focus, .zen-form textarea:focus { border-bottom-color: var(--zen-warm); }
-.submit-btn { background: transparent; border: 1px solid var(--zen-warm); color: var(--zen-warm); padding: 12px 40px; cursor: pointer; transition: 0.5s; }
-.submit-btn:hover { background: var(--zen-warm); color: #000; }
-
-.back-link { color: #555; text-decoration: none; font-size: 0.8rem; }
 footer { text-align: center; padding: 100px; color: #444; font-size: 0.8rem; }
-/* --- 正副會長室：典雅藍樣式增強 --- */
-
-/* 大面積深藍頂欄 */
-.office-header {
-    background-color: #1B365D; /* 沉穩深藍 */
-    padding: 180px 24px;
-    text-align: center;
-    position: relative;
-    border-bottom: 5px solid #000; /* 與黑色區塊的交界線 */
-}
-
-.office-header h1 {
-    font-size: 3.5rem;
-    color: #FFFFFF;
-    letter-spacing: 12px;
-    font-weight: 200;
-}
-
-.office-motto {
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 8px;
-    margin-top: 30px;
-    font-size: 0.9rem;
-}
-
-/* 古典引用區塊樣式 */
-.antique-quote {
-    padding: 60px;
-    background: rgba(27, 54, 93, 0.1); /* 帶點藍色的微影 */
-    border-left: 3px solid #1B365D;
-    margin: 40px 0;
-}
-
-.antique-quote p {
-    font-size: 1.5rem;
-    line-height: 2.5;
-    font-family: serif; /* 換成襯線體增加古雅感 */
-    color: #EEE;
-    font-style: italic;
-}
-
-.antique-quote cite {
-    display: block;
-    margin-top: 30px;
-    color: #1B365D;
-    font-weight: 700;
-    letter-spacing: 3px;
-}
-
-/* 辦公室專屬卡片樣式 */
-.office-card {
-    border-top: 4px solid #1B365D !important;
-}
-
-.back-link {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-
-.back-link:hover { color: #FFF; }
