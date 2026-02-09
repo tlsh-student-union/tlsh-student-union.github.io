@@ -86,3 +86,20 @@ h1 {
     margin-bottom: 8px;        /* 與下方標題保持一點距離 */
     text-transform: uppercase; /* 如果有英文會自動轉大寫，增加質感 */
 }
+/* --- 公告分類變色邏輯 --- */
+
+/* 通用的標籤樣式 */
+.category-tag {
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+/* 根據不同 Type 變色 */
+.tag-urgent { background-color: #FF4D4D; color: white !important; } /* 緊急紅 */
+.tag-event { background-color: #1B365D; color: white !important; }  /* 斗中藍 */
+.tag-info { background-color: #B58D67; color: white !important; }   /* 質感木色 */
