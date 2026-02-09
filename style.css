@@ -1,156 +1,96 @@
-/* 斗六高中學生會 - 最終視覺總案：【黑石禪意 2.0 · 破曉】
-   視覺目標：高端、深邃、濕潤石材、具備生命力的細節
+/* 斗六高中學生會 - 最終視覺總案：【黑石禪意 2.1 · 靜謐】
+   設計哲學：安靜的存在、低對比美學、石縫微光
 */
 
 :root {
-    --bg-base: #0A0A0A;        /* 1. 稍微拉高的深淵底色，增加深度感 */
-    --stone-card: #151515;     /* 2. 較亮的石板色，讓卡片從黑暗中「浮出來」 */
+    --bg-base: #080808;        /* 深淵底色 */
+    --stone-card: #121212;     /* 石板卡片色 */
     --accent-gold: #9A8468;    /* 枯金：石縫微光 */
-    --text-silver: #D1D1D1;    /* 霧銀：優雅文字 */
-    --text-dim: #666666;       /* 苔灰：低調資訊 */
-    --status-green: #2ECC71;   /* 生命之綠：象徵運作中的呼吸燈 */
-    --transition-zen: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    --text-silver: #D1D1D1;    /* 霧銀 */
+    --text-dim: #555555;       /* 苔灰：讓註解更安靜 */
+    --transition-zen: 1s cubic-bezier(0.22, 1, 0.36, 1); /* 更緩慢的過渡 */
 }
 
 /* --- 全域設定 --- */
 body {
     background-color: var(--bg-base);
-    font-family: 'Noto Serif TC', serif; /* 襯線體增加昂貴感 */
+    font-family: 'Noto Serif TC', serif;
     color: var(--text-silver);
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     line-height: 2;
     letter-spacing: 0.12em;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
-/* --- 導航列 (Navigation) - 徹底修復對齊問題 --- */
-nav {
+/* --- 導航列：水平絕對對齊 --- */
+.zen-nav {
     position: absolute;
-    top: 60px;
-    right: 80px;
+    top: 60px; right: 80px;
     z-index: 10000;
 }
 
-nav ul {
-    list-style: none; /* 移除圓點 */
+.zen-nav ul {
+    list-style: none;
     display: flex;
-    align-items: center; /* 垂直對齊校準 */
-    gap: 50px;
-    margin: 0;
-    padding: 0;
+    align-items: center; 
+    gap: 45px;
+    margin: 0; padding: 0;
 }
 
-nav a {
+.zen-nav a {
     text-decoration: none;
     color: var(--text-silver);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     letter-spacing: 4px;
     font-weight: 300;
     transition: var(--transition-zen);
-    opacity: 0.7;
-}
-
-nav a:hover {
-    color: var(--accent-gold);
-    opacity: 1;
-    text-shadow: 0 0 15px rgba(154, 132, 104, 0.6);
-}
-
-/* 消除 nav 內雜碎文字 */
-nav > span, nav > text { display: none !important; }
-
-/* --- 頁首 (Header) --- */
-header {
-    background-color: var(--bg-base);
-    padding: 200px 24px 120px 24px;
-    text-align: center;
-}
-
-h1 {
-    font-size: 4.2rem;
-    font-weight: 200;
-    letter-spacing: 25px; /* 極大字距 */
-    color: var(--text-silver);
-    margin: 0;
-    text-indent: 25px;
-}
-
-.subtitle {
-    color: var(--accent-gold);
-    margin-top: 40px;
-    font-size: 0.9rem;
-    letter-spacing: 15px;
-    font-weight: 300;
     opacity: 0.6;
 }
 
+.zen-nav a:hover { color: var(--accent-gold); opacity: 1; }
+
+/* --- 頁首 --- */
+header { padding: 180px 24px 100px 24px; text-align: center; }
+h1 { font-size: 3.8rem; font-weight: 200; letter-spacing: 22px; text-indent: 22px; margin: 0; }
+.subtitle { color: var(--accent-gold); margin-top: 35px; font-size: 0.85rem; letter-spacing: 12px; opacity: 0.5; }
+
 /* --- 內容容器 --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 60px 150px 60px;
-}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 60px 150px 60px; }
+h2 { font-size: 1.1rem; color: var(--accent-gold); margin: 100px 0 50px 0; border-bottom: 1px solid #1A1A1A; padding-bottom: 15px; letter-spacing: 6px; display: flex; align-items: center; }
+h2::before { content: ""; width: 35px; height: 1px; background: var(--accent-gold); margin-right: 20px; }
 
-h2 {
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--accent-gold);
-    margin: 150px 0 70px 0;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #1A1A1A;
-    letter-spacing: 8px;
-    display: flex;
-    align-items: center;
-}
-
-h2::before {
-    content: "";
-    width: 50px;
-    height: 1px;
-    background: var(--accent-gold);
-    margin-right: 25px;
-}
-
-/* --- 呼吸燈狀態列 (Status Bar) --- */
+/* --- 靜謐狀態標記 (The Quiet Marker) --- */
 .status-bar {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.65rem;
-    color: var(--text-dim);
+    gap: 12px;
+    font-size: 0.6rem;
+    color: var(--text-dim); /* 使用苔灰色，不搶戲 */
     letter-spacing: 3px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .status-dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--status-green);
+    width: 4px; height: 4px; /* 縮小點的大小 */
+    background-color: var(--accent-gold); /* 綠色改為枯金，與風格統一 */
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--status-green);
-    animation: zen-pulse 2.5s infinite; /* 呼吸燈特效 */
+    opacity: 0.5;
+    animation: zen-fade 6s infinite ease-in-out; /* 呼吸速度拉長到 6 秒，極度緩慢 */
 }
 
-@keyframes zen-pulse {
-    0% { opacity: 0.3; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.1); }
-    100% { opacity: 0.3; transform: scale(0.9); }
+@keyframes zen-fade {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.6; }
 }
 
-/* --- 卡片：濕潤黑石與行為暗示 --- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 70px;
-}
+/* --- 卡片：濕潤黑石與註解 --- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; }
 
 .card {
     background: var(--stone-card);
-    padding: 70px 50px;
-    border-radius: 0;
-    border: 1px solid #1E1E1E; /* 稍微明顯的石縫線 */
+    padding: 65px 50px;
+    border: 1px solid #1A1A1A;
     text-decoration: none;
     color: inherit;
     transition: var(--transition-zen);
@@ -160,79 +100,35 @@ h2::before {
     flex-direction: column;
 }
 
-/* 右下角 VIEW 箭頭暗示 (行為暗示) */
+/* 行為暗示：VIEW → (滑鼠移入才現形) */
 .card::after {
-    content: "VIEW →";
+    content: "ENTER →"; /* 語氣改為 ENTER，更具歡迎感 */
     position: absolute;
-    bottom: 35px;
-    right: 45px;
-    font-size: 0.65rem;
+    bottom: 35px; right: 45px;
+    font-size: 0.6rem;
     color: var(--accent-gold);
-    letter-spacing: 2px;
     opacity: 0;
-    transition: all 0.6s ease;
+    transition: var(--transition-zen);
     transform: translateX(-10px);
+    letter-spacing: 2px;
 }
 
-.card:hover {
-    background: #1C1C1C;
-    border-color: var(--accent-gold);
-    transform: translateY(-12px);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.9);
-}
+.card:hover { background: #181818; border-color: #333; transform: translateY(-8px); }
+.card:hover::after { opacity: 0.8; transform: translateX(0); }
 
-.card:hover::after {
-    opacity: 1;
-    transform: translateX(0); /* 移入時箭頭彈出 */
-}
+.card h3 { margin: 10px 0 15px 0; font-size: 1.5rem; font-weight: 300; letter-spacing: 2px; }
+.card p { color: var(--text-dim); line-height: 2; margin: 0; font-size: 0.9rem; transition: var(--transition-zen); }
+.card:hover p { color: var(--text-silver); }
 
-.card h3 {
-    color: var(--text-silver);
-    font-size: 1.7rem;
-    font-weight: 400;
-    margin: 0 0 25px 0;
-}
+/* 標籤：更內斂的印記風格 */
+.category-tag { font-size: 0.6rem; padding: 2px 10px; border: 1px solid #222; margin-bottom: 25px; display: inline-block; color: var(--text-dim); }
+.tag-urgent { color: #600 !important; border-color: #300; }
 
-.card p {
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    line-height: 2.2;
-    margin: 0 0 30px 0; /* 為右下角預留空間 */
-}
+footer { text-align: center; padding: 120px 24px; color: #222; font-size: 0.7rem; letter-spacing: 4px; }
 
-/* --- 動態公告標籤 --- */
-.category-tag {
-    font-size: 0.65rem;
-    padding: 3px 12px;
-    margin-bottom: 25px;
-    border: 1px solid #333;
-    letter-spacing: 3px;
-    align-self: flex-start;
-}
-
-/* --- 頁尾 --- */
-footer {
-    text-align: center;
-    padding: 120px 24px;
-    color: #333;
-    font-size: 0.75rem;
-    letter-spacing: 6px;
-    border-top: 1px solid #111;
-}
-
-/* --- 手機版自適應優化 --- */
 @media (max-width: 600px) {
-    header { padding: 120px 20px 80px 20px; }
-    h1 { font-size: 2.4rem; letter-spacing: 12px; text-indent: 12px; }
-    
-    nav {
-        position: relative;
-        top: 0;
-        right: 0;
-        padding: 40px 0;
-        text-align: center;
-    }
-    
-    nav ul { justify-content: center; gap: 20px; }
-    .container { padding: 0 24px 80px 24px; }
+    header { padding: 100px 20px; }
+    h1 { font-size: 2rem; letter-spacing: 10px; }
+    .zen-nav { position: relative; top: 0; right: 0; padding: 40px 0; text-align: center; }
+    .zen-nav ul { justify-content: center; gap: 20px; }
 }
