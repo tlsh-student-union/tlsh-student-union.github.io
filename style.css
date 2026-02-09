@@ -215,20 +215,42 @@ footer {
     header { padding: 120px 20px 80px 20px; }
     h1 { font-size: 2.4rem; letter-spacing: 12px; text-indent: 12px; }
     
-    nav {
-        position: relative;
-        top: 0;
-        right: 0;
-        padding: 40px 0;
-        text-align: center;
-    }
-    
-    nav ul {
-        justify-content: center;
-        gap: 20px;
-    }
+    /* --- 導航列：極致對齊版 --- */
+nav {
+    position: absolute;
+    top: 50px;          /* 距離頂部高度 */
+    right: 60px;        /* 距離右邊寬度 */
+    z-index: 10000;
+}
 
-    .container { padding: 0 24px 80px 24px; }
-    .grid { gap: 40px; }
-    .card { padding: 50px 35px; }
+nav ul {
+    list-style: none;
+    display: flex;      /* 橫向排隊 */
+    align-items: center; /* 垂直方向絕對置中對齊 */
+    gap: 40px;          /* 選項間距保持一致 */
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-silver); 
+    font-size: 0.85rem;
+    letter-spacing: 4px; /* 質感字距 */
+    font-weight: 300;
+    transition: var(--transition-zen);
+    opacity: 0.7;
+    white-space: nowrap; /* 強制不換行，確保整齊 */
+}
+
+nav a:hover {
+    color: var(--accent-gold);
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(154, 132, 104, 0.5);
+}
+
+/* --- 隱藏那個在選單裡多出來的標題 --- */
+/* 如果你的 HTML 裡 nav 第一個元素是文字而不是連結，這行會幫你清理它 */
+nav > text, nav > span {
+    display: none;
 }
