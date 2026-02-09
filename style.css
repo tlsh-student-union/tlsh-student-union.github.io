@@ -1,5 +1,59 @@
 /* 斗六高中學生會 - City Boy 官網最終視覺定義 */
 :root {
+    /* --- 高級導覽列樣式 --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果，像 Apple 官網一樣 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-logo {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent); /* 滑過時變成暖木色 */
+}
+
+/* 手機版導覽列微調 */
+@media (max-width: 600px) {
+    .nav-links {
+        display: none; /* 手機版暫時隱藏複雜選單，保持簡潔 */
+    }
+}
     --bg-color: #F9F7F2;   /* 質感米白 */
     --navy: #1B365D;       /* 專業深藍 */
     --accent: #B58D67;     /* 暖木色 */
