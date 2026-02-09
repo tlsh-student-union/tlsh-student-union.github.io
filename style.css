@@ -223,15 +223,34 @@ nav a:first-child {
 
 /* 手機版導航自動調整 */
 @media (max-width: 600px) {
-    nav {
-        position: relative;
-        top: 0;
-        right: 0;
-        padding: 20px 0;
-        text-align: center;
-    }
-    nav ul {
-        justify-content: center;
-        gap: 20px;
-    }
+    /* --- 導航列：黑石顯現版 --- */
+nav {
+    position: absolute; 
+    top: 50px;
+    right: 60px;        /* 稍微往左移一點，確保在畫面內 */
+    z-index: 1000;      /* 提高層級，確保它在最前方 */
 }
+
+nav ul {
+    list-style: none;   /* 移除圓點 */
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-silver); /* 1. 換成較亮的霧銀色，確保你看得到它！ */
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    transition: all 0.5s ease;
+    font-weight: 300;
+}
+
+nav a:hover {
+    color: var(--accent-gold); 
+    text-shadow: 0 0 15px rgba(154, 132, 104, 0.8); /* 2. 增加發光強度，像螢火蟲一樣 */
+}
+
+/* --- 刪掉了原本那個會讓連結消失的錯誤代碼 --- */
