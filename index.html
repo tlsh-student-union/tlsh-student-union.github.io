@@ -18,6 +18,8 @@
         </ul>
     </nav>
 
+    <div id="cursor-glow"></div>
+    
     <header>
         <h1>斗六高中學生會</h1>
         <div class="subtitle">簡約專業 · 凝聚向心力</div>
@@ -129,6 +131,18 @@
         }
     }
     loadAnnouncements();
+    // --- 滑鼠光影追蹤邏輯 ---
+const glow = document.getElementById('cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+    // 讓光影中心隨著滑鼠座標移動
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+});
+
+// 當滑鼠離開視窗時，把光藏起來
+document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
 </script>
 </body>
 </html>
