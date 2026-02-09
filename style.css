@@ -120,6 +120,20 @@ footer {
     color: #999;
     font-size: 0.9rem;
 }
+/* --- 平板版專屬微調 (螢幕寬度 601px 到 1024px) --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .container {
+        padding: 50px 40px; /* 平板兩側留白多一點，更有高級感 */
+    }
+
+    .grid {
+        gap: 25px; /* 稍微縮小間距，讓兩張卡片看起來更緊湊 */
+    }
+
+    h1 {
+        font-size: 2.6rem; /* 標題介於手機與電腦之間 */
+    }
+}
 /* --- 手機版專屬微調 [@media] --- */
 @media (max-width: 600px) {
     header {
