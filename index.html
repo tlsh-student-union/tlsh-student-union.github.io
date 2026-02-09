@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo">斗中學生會</a>
-        <ul class="nav-links">
-            <li><a href="#announcement-grid">最新動態</a></li>
-            <li><a href="activities.html">行政部門</a></li>
-            <li><a href="#">特約商家</a></li>
-            <li><a href="#">意見箱</a></li>
-        </ul>
-    </div>
-</nav>
-
-<header>
-    <h1>斗六高中學生會</h1>
-    <div class="subtitle">簡約專業 · 凝聚向心力</div>
-</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斗六高中學生會 | 官方網站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">斗中學生會</a>
+            <ul class="nav-links">
+                <li><a href="#announcement-grid">最新動態</a></li>
+                <li><a href="activities.html">行政部門</a></li>
+                <li><a href="#">特約商家</a></li>
+                <li><a href="#">意見箱</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <header>
         <h1>斗六高中學生會</h1>
@@ -34,25 +36,9 @@
             <a href="documents.html" class="card"><h3>總務部</h3><p>財務透明，每一分經費精準運用。</p></a>
         </div>
 
-        <h2>最新動態</h2>
-        <div id="announcement-grid" class="grid">
+        <h2 id="announcement-grid">最新動態</h2>
+        <div id="announcement-grid-content" class="grid">
             <p>正在連線至後台，請稍候...</p>
-        </div>
-
-        <h2>年度核心計畫</h2>
-        <div class="grid">
-            <div class="card construction">
-                <h3>校園交通改善</h3>
-                <p>正在努力搬磚中... 敬請期待！</p>
-            </div>
-            <div class="card construction">
-                <h3>日本交換計畫</h3>
-                <p>正在與日方連線中... 敬請期待！</p>
-            </div>
-            <div class="card construction">
-                <h3>理科資源共享</h3>
-                <p>正在整理筆記中... 敬請期待！</p>
-            </div>
         </div>
     </div>
 
@@ -61,17 +47,14 @@
     </footer>
 
 <script>
-    // 1. 定義資料來源連結
     const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
 
     async function loadAnnouncements() {
         try {
             const response = await fetch(spreadsheetUrl);
             const data = await response.text();
-            
-            // 2. 解析 CSV 資料並排除空行
             const rows = data.split('\n').filter(row => row.trim() !== '').slice(1);
-            const container = document.getElementById('announcement-grid');
+            const container = document.getElementById('announcement-grid-content');
             
             if (rows.length === 0) {
                 container.innerHTML = '<p>目前尚無最新消息。</p>';
@@ -80,7 +63,6 @@
 
             container.innerHTML = ''; 
 
-            // 3. 遍歷每一列資料並生成卡片
             rows.forEach(row => {
                 const cols = row.split(',');
                 if (cols.length >= 2) {
@@ -89,8 +71,6 @@
                     const content = cols[2] || '';
                     const date = cols[3] || '';
                     const link = cols[4] ? cols[4].trim() : '#';
-                    
-                    // 讀取 F 欄 (索引值為 5) 決定顏色分類
                     const type = cols[5] ? cols[5].trim().toLowerCase() : 'info';
                     const tagClass = `tag-${type}`;
 
@@ -105,13 +85,10 @@
                 }
             });
         } catch (error) {
-            // 4. 補回剛才被刪掉的錯誤處理與結尾
-            console.error('讀取資料失敗:', error);
-            document.getElementById('announcement-grid').innerHTML = '<p>暫時無法載入公告，請檢查後台連線。</p>';
+            console.error('讀取失敗:', error);
+            document.getElementById('announcement-grid-content').innerHTML = '<p>暫時無法載入公告。</p>';
         }
     }
-
-    // 啟動程式
     loadAnnouncements();
 </script>
 </body>
