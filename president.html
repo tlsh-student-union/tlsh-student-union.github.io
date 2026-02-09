@@ -3,22 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>部門頁面 | 斗六高中學生會</title>
+    <title>正副會長室 | 斗六高中學生會</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header style="height: 30vh; display: flex; align-items: center; justify-content: center; background-color: #1B365D; color: white;">
-        <h1>部門資訊正在準備中</h1>
+<body class="office-body">
+    <div id="cursor-glow"></div>
+
+    <header class="office-header">
+        <a href="index.html" class="back-link">← 返回首頁導覽</a>
+        <div class="header-content">
+            <h1>正副會長室</h1>
+            <p class="office-motto">願景 · 聽見 · 實踐</p>
+        </div>
     </header>
 
-    <div style="max-width: 800px; margin: 50px auto; padding: 20px; text-align: center;">
-        <p>我們會長正在與部長們討論最精采的內容，敬請期待！</p>
-        <br>
-        <a href="index.html" style="text-decoration: none; color: #B58D67; font-weight: bold;">← 返回首頁導覽</a>
+    <div class="container">
+        <section class="zen-section">
+            <h2 class="section-title">會長寄語</h2>
+            <div class="antique-quote">
+                <p>「每一位斗中人的聲音，都是石澗中清澈的水滴。我們在此匯集，不是為了改變世界，而是為了讓身處的校園變得更值得被愛。」</p>
+                <cite>— 第 32 屆 學生會會長</cite>
+            </div>
+        </section>
+
+        <section class="zen-section">
+            <h2 class="section-title">未來展望</h2>
+            <div class="grid">
+                <div class="card office-card"><h3>校園美學</h3><p>重塑學生會視覺識別系統，提升校園活動的質感與參與感。</p></div>
+                <div class="card office-card"><h3>數位轉型</h3><p>透過數位化管理，讓行政流程更透明，資訊傳遞更即時。</p></div>
+                <div class="card office-card"><h3>權益保障</h3><p>建立通暢的申訴管道，守護每一位同學在校園中的權益。</p></div>
+            </div>
+        </section>
+
+        <section class="zen-section" id="feedback">
+            <h2 class="section-title">意見回饋</h2>
+            <div class="zen-box">
+                <p class="box-desc">你的建議將直接傳達至會長室。請像投石入水般，留下你的聲音。</p>
+                <form action="https://formspree.io/f/xldgqypq" method="POST" class="zen-form">
+                    <div class="form-group"><label>你的稱呼</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>意見內容</label><textarea name="message" rows="5" required></textarea></div>
+                    <button type="submit" class="submit-btn"><span>匯集成水</span></button>
+                </form>
+            </div>
+        </section>
     </div>
 
-    <footer style="text-align: center; padding: 40px; color: #ccc;">
-        &copy; 2026 國立斗六高級中學學生會
-    </footer>
+    <footer>&copy; 2026 國立斗六高級中學學生會.</footer>
+
+    <script>
+        const glow = document.getElementById('cursor-glow');
+        let mx = 0, my = 0, bx = 0, by = 0;
+        document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+        function anim() {
+            bx += (mx - bx) * 0.08; by += (my - by) * 0.08;
+            glow.style.left = bx + 'px'; glow.style.top = by + 'px';
+            requestAnimationFrame(anim);
+        }
+        anim();
+    </script>
 </body>
 </html>
