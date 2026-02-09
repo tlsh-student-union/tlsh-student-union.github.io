@@ -1,6 +1,6 @@
-/* 斗六高中學生會 - 高級視覺地基 */
+/* 斗六高中學生會 - City Boy 官網最終視覺定義 */
 :root {
-    --bg-color: #F9F7F2;   /* 紙張米白 */
+    --bg-color: #F9F7F2;   /* 質感米白 */
     --navy: #1B365D;       /* 專業深藍 */
     --accent: #B58D67;     /* 暖木色 */
     --white: #FFFFFF;
@@ -14,92 +14,109 @@ body {
     color: #333;
 }
 
-/* 讓內容不要貼邊的關鍵：Container */
 .container {
-    max-width: 1000px; /* 限制最大寬度 */
-    margin: 0 auto;    /* 置中 */
-    padding: 60px 20px; /* 上下留白 60px，左右留白 20px */
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px 24px;
 }
 
 header {
     background-color: var(--white);
-    padding: 80px 20px;
+    padding: 100px 24px;
     text-align: center;
     border-bottom: 1px solid #eee;
 }
 
 h1 {
     color: var(--navy);
-    font-size: 2.5rem;
-    letter-spacing: 4px;
+    font-size: 3rem;
+    letter-spacing: 6px;
     margin: 0;
+    font-weight: 900;
 }
 
 .subtitle {
     color: var(--accent);
-    margin-top: 10px;
+    margin-top: 15px;
+    letter-spacing: 3px;
+    font-weight: 500;
+}
+
+/* 標題裝飾線 - 解決「怪怪的」第一步 */
+h2 {
+    margin-top: 80px;
+    margin-bottom: 35px;
+    font-size: 1.8rem;
+    color: var(--navy);
+    border-left: 5px solid var(--accent);
+    padding-left: 18px;
     letter-spacing: 2px;
 }
 
-/* 恢復卡片式排版：Grid */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自動分配寬度 */
-    gap: 30px; /* 卡片之間的間距 */
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
 }
 
+/* 卡片內縮與呼吸感優化 */
 .card {
     background: var(--white);
     padding: 40px;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid #eee;
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
     border-color: var(--navy);
     box-shadow: 0 20px 40px rgba(27, 54, 93, 0.1);
 }
 
-.card h3 {
-    color: var(--navy);
-    margin-top: 0;
-}
-
-/* 施工中樣式 */
-.construction {
-    background-color: #f0f0f0;
-    border: 1px dashed #ccc;
-    opacity: 0.7;
-}
-/* 公告類別標籤的專屬樣式 */
+/* 膠囊型標籤 - 解決「怪怪的」第二步 */
 .category-tag {
-    color: var(--accent);      /* 直接套用我們定義好的暖木色變數 */
-    font-size: 0.8rem;
-    font-weight: bold;
-    display: block;            /* 確保它獨立佔一行 */
-    margin-bottom: 8px;        /* 與下方標題保持一點距離 */
-    text-transform: uppercase; /* 如果有英文會自動轉大寫，增加質感 */
-}
-/* --- 公告分類變色邏輯 --- */
-
-/* 通用的標籤樣式 */
-.category-tag {
-    font-size: 0.75rem;
-    font-weight: bold;
+    font-size: 0.7rem;
+    font-weight: 800;
     display: inline-block;
-    margin-bottom: 12px;
-    padding: 4px 10px;
-    border-radius: 6px;
+    align-self: flex-start; /* 讓標籤不會撐滿整行 */
+    margin-bottom: 20px;
+    padding: 5px 14px;
+    border-radius: 50px;
     letter-spacing: 1px;
 }
 
-/* 根據不同 Type 變色 */
-.tag-urgent { background-color: #FF4D4D; color: white !important; } /* 緊急紅 */
-.tag-event { background-color: #1B365D; color: white !important; }  /* 斗中藍 */
-.tag-info { background-color: #B58D67; color: white !important; }   /* 質感木色 */
+.tag-urgent { background-color: #E63946; color: white !important; }
+.tag-event { background-color: var(--navy); color: white !important; }
+.tag-info { background-color: var(--accent); color: white !important; }
+
+.card h3 {
+    color: var(--navy);
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* 施工中卡片 */
+.construction {
+    background-color: rgba(230, 230, 230, 0.4);
+    border: 2px dashed #ccc;
+    opacity: 0.8;
+}
+
+footer {
+    text-align: center;
+    padding: 60px 24px;
+    color: #999;
+    font-size: 0.9rem;
+}
