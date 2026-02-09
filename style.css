@@ -165,3 +165,19 @@ body {
     letter-spacing: 2px;
     opacity: 0.6;
 }
+/* --- 禪意光影：滑鼠跟隨效果 --- */
+#cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px; /* 光源的大小 */
+    height: 600px;
+    /* 使用徑向漸層，中心是微弱的暖金色，向外擴散消失 */
+    background: radial-gradient(circle, rgba(142, 121, 93, 0.05) 0%, rgba(142, 121, 93, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none; /* 重要：讓滑鼠可以穿透光影，不影響點擊按鈕 */
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* 確保光在最上層 */
+    transition: opacity 0.3s ease;
+    mix-blend-mode: screen; /* 讓光影與黑色背景融合得更自然 */
+}
