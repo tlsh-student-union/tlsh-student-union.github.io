@@ -1,4 +1,4 @@
-/* 斗六高中學生會 - 最終完美對齊版 */
+/* 斗六高中學生會 - 最終完美修正版 */
 :root {
     --bg-color: #F9F7F2;
     --navy: #1B365D;
@@ -8,19 +8,19 @@
 
 body { background-color: var(--bg-color); font-family: sans-serif; margin: 0; padding: 0; }
 
-/* 導覽列與標題略... (保持之前的不變) */
-.navbar { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 15px 0; }
+/* 導覽列保持不變... */
+.navbar { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 12px 0; }
 .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; }
-.nav-logo { font-weight: 900; color: var(--navy); text-decoration: none; }
-.nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+.nav-logo { font-weight: 900; color: var(--navy); text-decoration: none; letter-spacing: 2px; }
+.nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
 .nav-links a { text-decoration: none; color: #555; font-size: 0.9rem; font-weight: 700; }
 header { background: var(--white); padding: 80px 24px; text-align: center; }
-h1 { color: var(--navy); font-size: 2.8rem; margin: 0; }
-.subtitle { color: var(--accent); margin-top: 10px; }
+h1 { color: var(--navy); font-size: 2.8rem; margin: 0; letter-spacing: 5px; }
+.subtitle { color: var(--accent); margin-top: 10px; letter-spacing: 3px; }
 
 /* 內容區塊 */
 .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
-h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy); margin: 40px 0 30px 0; }
+h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy); margin: 50px 0 25px 0; font-size: 1.6rem; }
 
 .grid {
     display: grid;
@@ -29,35 +29,34 @@ h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy
     align-items: stretch;
 }
 
-/* 🏆 卡片大手術：取消 padding，改由內部控制 */
+/* 🏆 卡片容器：確保動畫能被看見 */
 .card {
     background: var(--white);
     border-radius: 16px;
     border: 1px solid #eee;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* 確保內容不會超出圓角 */
+    overflow: hidden;
     height: 100%;
+    min-height: 180px; /* 確保沒圖片的格子也有足夠高度 */
 }
 
-.card:hover { transform: translateY(-5px); border-color: var(--navy); }
+.card:hover { 
+    transform: translateY(-8px); 
+    border-color: var(--navy); 
+    box-shadow: 0 15px 30px rgba(27, 54, 93, 0.1);
+}
 
-/* 🏆 圖片完美對齊：寬度 100% 且不使用負邊距 */
+/* 🏆 照片縮放動畫修正 */
 .card-image {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    background-color: #eee; /* 預設底色 */
+    background-color: #eee;
     flex-shrink: 0;
-}
-
-/* 沒照片時的佔位符：使用質感的深藍色，解決文字跳動問題 */
-.card-image.placeholder {
-    background: linear-gradient(135deg, var(--navy) 0%, #2c4a7c 100%);
-    opacity: 0.1; /* 淡淡的顏色，既美觀又能對齊 */
 }
 
 .card-image img {
@@ -65,14 +64,26 @@ h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s ease; /* 恢復平滑縮放效果 */
 }
 
-/* 🏆 文字內容區：控制留白 */
+/* 當滑鼠移到卡片上，照片放大 */
+.card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-image.placeholder {
+    background: linear-gradient(135deg, var(--navy) 0%, #2c4a7c 100%);
+    opacity: 0.1;
+}
+
+/* 🏆 文字內容區：恢復舒服的 Padding */
 .card-body {
-    padding: 30px; /* 在這裡控制文字與邊框的距離 */
+    padding: 35px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* 讓文字在垂直方向居中 */
 }
 
 .category-tag { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 50px; margin-bottom: 15px; align-self: flex-start; }
@@ -80,7 +91,13 @@ h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy
 .tag-event { background: var(--navy); color: white !important; }
 .tag-info { background: var(--accent); color: white !important; }
 
-.card h3 { color: var(--navy); margin: 0 0 10px 0; font-size: 1.3rem; }
+.card h3 { color: var(--navy); margin: 0 0 12px 0; font-size: 1.4rem; font-weight: 800; }
 .card p { color: #666; font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
 footer { text-align: center; padding: 60px; color: #999; }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    h1 { font-size: 2.2rem; }
+    .card-body { padding: 25px; }
+}
