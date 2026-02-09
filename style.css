@@ -45,3 +45,69 @@ h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to ri
 
 .back-link { color: #555; text-decoration: none; font-size: 0.8rem; }
 footer { text-align: center; padding: 100px; color: #444; font-size: 0.8rem; }
+/* --- 正副會長室：典雅藍樣式增強 --- */
+
+/* 大面積深藍頂欄 */
+.office-header {
+    background-color: #1B365D; /* 沉穩深藍 */
+    padding: 180px 24px;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid #000; /* 與黑色區塊的交界線 */
+}
+
+.office-header h1 {
+    font-size: 3.5rem;
+    color: #FFFFFF;
+    letter-spacing: 12px;
+    font-weight: 200;
+}
+
+.office-motto {
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 8px;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+/* 古典引用區塊樣式 */
+.antique-quote {
+    padding: 60px;
+    background: rgba(27, 54, 93, 0.1); /* 帶點藍色的微影 */
+    border-left: 3px solid #1B365D;
+    margin: 40px 0;
+}
+
+.antique-quote p {
+    font-size: 1.5rem;
+    line-height: 2.5;
+    font-family: serif; /* 換成襯線體增加古雅感 */
+    color: #EEE;
+    font-style: italic;
+}
+
+.antique-quote cite {
+    display: block;
+    margin-top: 30px;
+    color: #1B365D;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* 辦公室專屬卡片樣式 */
+.office-card {
+    border-top: 4px solid #1B365D !important;
+}
+
+.back-link {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.back-link:hover { color: #FFF; }
