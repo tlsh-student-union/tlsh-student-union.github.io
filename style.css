@@ -26,7 +26,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 導航列 (Navigation) --- */
+/* --- 導航列 (Desktop) --- */
 nav {
     position: absolute;
     top: 60px;
@@ -37,6 +37,7 @@ nav {
 nav ul {
     list-style: none; /* 徹底消失的圓點 */
     display: flex;
+    align-items: center; /* 確保所有選項水平切齊 */
     gap: 50px;
     margin: 0;
     padding: 0;
@@ -44,7 +45,7 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: var(--text-silver); /* 確保文字可見 */
+    color: var(--text-silver); 
     font-size: 0.85rem;
     letter-spacing: 4px;
     font-weight: 300;
@@ -56,6 +57,11 @@ nav a:hover {
     color: var(--accent-gold);
     opacity: 1;
     text-shadow: 0 0 15px rgba(154, 132, 104, 0.6);
+}
+
+/* 強制消除 nav 內多餘文字 */
+nav > span, nav > text {
+    display: none !important;
 }
 
 /* --- 頁首 (Header) --- */
@@ -131,7 +137,6 @@ h2::before {
     flex-direction: column;
 }
 
-/* 增加卡片表面的濕潤反光感 */
 .card::before {
     content: "";
     position: absolute;
@@ -148,9 +153,7 @@ h2::before {
     box-shadow: 0 40px 80px rgba(0,0,0,0.9);
 }
 
-.card:hover::before {
-    opacity: 1;
-}
+.card:hover::before { opacity: 1; }
 
 .card h3 {
     color: var(--text-silver);
@@ -160,27 +163,18 @@ h2::before {
     transition: var(--transition-zen);
 }
 
-.card:hover h3 {
-    color: var(--accent-gold);
-}
+.card:hover h3 { color: var(--accent-gold); }
 
 .card p {
     color: var(--text-dim);
     font-size: 1rem;
     line-height: 2.2;
     margin: 0;
-    transition: var(--transition-zen);
 }
 
-.card:hover p {
-    color: var(--text-silver);
-}
-
-/* --- 動態公告標籤 --- */
+/* --- 標籤 --- */
 .category-tag {
     font-size: 0.7rem;
-    font-weight: 400;
-    display: inline-block;
     padding: 4px 15px;
     margin-bottom: 35px;
     border: 1px solid #333;
@@ -191,14 +185,6 @@ h2::before {
 .tag-urgent { color: #8B0000 !important; border-color: #5A0000; }
 .tag-event { color: var(--accent-gold) !important; border-color: #4A3F32; }
 .tag-info { color: #555 !important; border-color: #222; }
-
-/* --- 年度核心計畫 --- */
-.construction {
-    background-color: transparent;
-    border: 1px dashed var(--border-line);
-    filter: grayscale(1);
-    opacity: 0.4;
-}
 
 /* --- 頁尾 --- */
 footer {
@@ -215,42 +201,16 @@ footer {
     header { padding: 120px 20px 80px 20px; }
     h1 { font-size: 2.4rem; letter-spacing: 12px; text-indent: 12px; }
     
-/* --- 導航列：黑石極致對齊版 --- */
-nav {
-    position: absolute;
-    top: 55px;          /* 稍微調低一點點，讓它與標題更有空間感 */
-    right: 60px;
-    z-index: 10000;
-}
-
-nav ul {
-    list-style: none;   /* 移除所有圓點 */
-    display: flex;      /* 強制橫向排列 */
-    align-items: center; /* 垂直絕對置中，解決不整齊問題 */
-    gap: 45px;          /* 增加間距，增加「昂貴感」 */
-    margin: 0;
-    padding: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-silver); 
-    font-size: 0.85rem;
-    letter-spacing: 4px; /* 維持寂小風的質感字距 */
-    font-weight: 300;
-    transition: var(--transition-zen);
-    opacity: 0.7;
-    white-space: nowrap; /* 確保文字在手機上也不會亂跑換行 */
-}
-
-nav a:hover {
-    color: var(--accent-gold);
-    opacity: 1;
-    text-shadow: 0 0 15px rgba(154, 132, 104, 0.4);
-}
-
-/* --- 強制消除那個多出來的抬頭文字 --- */
-/* 這行會幫你把 nav 裡面非連結的雜碎文字通通藏起來 */
-nav > span, nav > div:not(ul) {
-    display: none !important;
+    nav {
+        position: relative;
+        top: 0;
+        right: 0;
+        padding: 40px 0;
+        text-align: center;
+    }
+    
+    nav ul {
+        justify-content: center;
+        gap: 20px;
+    }
 }
