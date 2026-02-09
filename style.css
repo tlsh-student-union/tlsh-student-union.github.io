@@ -1,4 +1,4 @@
-/* 斗六高中學生會 - City Boy 最終完美對齊版 */
+/* 斗六高中學生會 - 最終完美對齊版 */
 :root {
     --bg-color: #F9F7F2;
     --navy: #1B365D;
@@ -6,177 +6,81 @@
     --white: #FFFFFF;
 }
 
-body {
-    background-color: var(--bg-color);
-    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-    margin: 0;
-    padding: 0;
-}
+body { background-color: var(--bg-color); font-family: sans-serif; margin: 0; padding: 0; }
 
-/* 導覽列 */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 15px 0;
-}
-
-.nav-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px;
-}
-
-.nav-logo {
-    font-weight: 900;
-    font-size: 1.1rem;
-    color: var(--navy);
-    text-decoration: none;
-    letter-spacing: 2px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.9rem;
-    font-weight: 700;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover { color: var(--accent); }
-
-/* 頁首 */
-header {
-    background-color: var(--white);
-    padding: 100px 24px;
-    text-align: center;
-}
-
-h1 {
-    color: var(--navy);
-    font-size: 3rem;
-    letter-spacing: 5px;
-    margin: 0;
-    font-weight: 900;
-}
-
-.subtitle {
-    color: var(--accent);
-    margin-top: 15px;
-    letter-spacing: 3px;
-}
+/* 導覽列與標題略... (保持之前的不變) */
+.navbar { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 15px 0; }
+.nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 24px; }
+.nav-logo { font-weight: 900; color: var(--navy); text-decoration: none; }
+.nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; color: #555; font-size: 0.9rem; font-weight: 700; }
+header { background: var(--white); padding: 80px 24px; text-align: center; }
+h1 { color: var(--navy); font-size: 2.8rem; margin: 0; }
+.subtitle { color: var(--accent); margin-top: 10px; }
 
 /* 內容區塊 */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 24px;
-}
+.container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+h2 { border-left: 5px solid var(--accent); padding-left: 15px; color: var(--navy); margin: 40px 0 30px 0; }
 
-h2 {
-    margin-top: 60px;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-    color: var(--navy);
-    border-left: 5px solid var(--accent);
-    padding-left: 18px;
-}
-
-/* 網格系統 */
 .grid {
     display: grid;
-    /* 這裡確保了每一列的高度會以最高的卡片為準 */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
-    align-items: stretch; /* 關鍵：強制拉伸對齊 */
+    gap: 30px;
+    align-items: stretch;
 }
 
-/* 🏆 卡片核心 (對齊的關鍵) */
+/* 🏆 卡片大手術：取消 padding，改由內部控制 */
 .card {
     background: var(--white);
-    padding: 40px;
     border-radius: 16px;
     border: 1px solid #eee;
     text-decoration: none;
     color: inherit;
     transition: transform 0.3s;
-    
-    /* 讓卡片變成彈性容器 */
     display: flex;
-    flex-direction: column; /* 內容垂直排列 */
-    height: 100%; /* 強制佔滿網格高度 */
-    box-sizing: border-box; /* 確保 padding 不會撐破高度 */
+    flex-direction: column;
+    overflow: hidden; /* 確保內容不會超出圓角 */
+    height: 100%;
 }
 
 .card:hover { transform: translateY(-5px); border-color: var(--navy); }
 
-/* --- 公告圖片優化 --- */
+/* 🏆 圖片完美對齊：寬度 100% 且不使用負邊距 */
 .card-image {
     width: 100%;
-    height: 200px; /* 固定圖片高度 */
+    height: 200px;
     overflow: hidden;
-    /* 抵銷卡片的 padding，讓圖片貼齊邊緣 */
-    margin: -40px -40px 25px -40px; 
-    border-radius: 12px 12px 0 0;
-    flex-shrink: 0; /* 防止圖片被壓縮 */
+    background-color: #eee; /* 預設底色 */
+    flex-shrink: 0;
+}
+
+/* 沒照片時的佔位符：使用質感的深藍色，解決文字跳動問題 */
+.card-image.placeholder {
+    background: linear-gradient(135deg, var(--navy) 0%, #2c4a7c 100%);
+    opacity: 0.1; /* 淡淡的顏色，既美觀又能對齊 */
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    display: block;
 }
 
-.card:hover .card-image img {
-    transform: scale(1.1);
-}
-
-/* 🏆 卡片文字內容區 (自動撐開的關鍵) */
-.card-content {
-    /* 讓文字區塊自動填滿剩餘空間，解決下方留白問題 */
-    flex-grow: 1; 
+/* 🏆 文字內容區：控制留白 */
+.card-body {
+    padding: 30px; /* 在這裡控制文字與邊框的距離 */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* 標籤與文字 */
-.category-tag {
-    font-size: 0.75rem;
-    font-weight: 800;
-    display: inline-block;
-    padding: 5px 14px;
-    border-radius: 50px;
-    margin-bottom: 18px;
-    align-self: flex-start; /* 靠左對齊 */
-}
-
+.category-tag { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 50px; margin-bottom: 15px; align-self: flex-start; }
 .tag-urgent { background: #E63946; color: white !important; }
 .tag-event { background: var(--navy); color: white !important; }
 .tag-info { background: var(--accent); color: white !important; }
 
-.card h3 { color: var(--navy); margin: 0 0 15px 0; font-size: 1.4rem; }
-.card p { color: #666; font-size: 1rem; line-height: 1.7; margin: 0; }
+.card h3 { color: var(--navy); margin: 0 0 10px 0; font-size: 1.3rem; }
+.card p { color: #666; font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
 footer { text-align: center; padding: 60px; color: #999; }
-
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    h1 { font-size: 2.2rem; }
-    .card { padding: 30px; } /* 手機版稍微縮小內距 */
-    .card-image { margin: -30px -30px 20px -30px; } /* 配合手機版內距調整圖片邊界 */
-}
