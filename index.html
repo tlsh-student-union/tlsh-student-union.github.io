@@ -72,13 +72,14 @@
                     const link = cols[4] || '#'; // 連結
 
                     // 產生 City Boy 風格卡片
-                    const card = `
-                        <a href="${link}" class="card">
-                            <span style="color: #B58D67; font-size: 0.8rem; font-weight: bold;">[${category}] ${date}</span>
-                            <h3>${title}</h3>
-                            <p>${content}</p>
-                        </a>
-                    `;
+                    c// 產生 City Boy 風格卡片 (已優化樣式管理)
+const card = `
+    <a href="${link}" class="card">
+        <span class="category-tag">[${category}] ${date}</span>
+        <h3>${title}</h3>
+        <p>${content}</p>
+    </a>
+`;
                     container.innerHTML += card;
                 }
             });
