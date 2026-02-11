@@ -1,108 +1,92 @@
-/* 斗六高中學生會 - 禪意石澗 (極致深邃版) */
+/* 斗六高中學生會 - 禪意石澗 (極致深度實驗版) */
 
 :root {
-    --bg-void: #050505;        /* 更深邃的虛無黑 */
-    --stone-base: #0D0D0D;     /* 基底石材色 */
-    --stone-reflect: #161616;  /* 微光反射色 */
-    --zen-gold: #C5B358;       /* 暖金點綴 */
-    --text-silk: #A0A0A0;      /* 降低文字亮度，增加沉穩感 */
+    --bg-deep: #030303;        /* 接近虛無的深淵黑 */
+    --stone-highlight: #121212; /* 石材受光面 */
+    --zen-warm: #C5B358;
 }
 
 body {
-    background-color: var(--bg-void);
-    /* 強化放射光，營造中央深邃、邊緣消逝的氛圍 */
+    background-color: var(--bg-deep);
+    /* 1. 三層複合背景：底色 + 強化石孔紋理 + 深度暗角 */
     background-image: 
-        radial-gradient(circle at 50% 40%, #111111 0%, var(--bg-void) 70%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-blend-mode: overlay; /* 注入石材噪點質感 */
+        /* 頂層：強大的四角暗角，營造空間深度 */
+        radial-gradient(circle at 50% 40%, transparent 20%, var(--bg-deep) 85%),
+        /* 中層：偏心光源，模擬側面打光產生的石材浮雕感 */
+        radial-gradient(circle at 30% 20%, #151515 0%, transparent 50%),
+        /* 底層：玄武岩孔洞質感 */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='stoneNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23stoneNoise)' opacity='0.08'/%3E%3C/svg%3E");
     background-attachment: fixed;
     margin: 0;
     font-family: "PingFang TC", "Noto Sans TC", sans-serif;
-    color: var(--text-silk);
-    letter-spacing: 0.15em; /* 增加字距提升呼吸感 */
-    overflow-x: hidden;
+    color: #A0A0A0;
+    letter-spacing: 0.15em;
 }
 
-/* 強化版禪意暖光 */
+/* 強化暖光的「渲染感」 */
 #cursor-glow {
-    position: fixed; width: 800px; height: 800px; z-index: 1; pointer-events: none;
-    background: radial-gradient(circle, rgba(197, 179, 88, 0.05) 0%, rgba(197, 179, 88, 0) 60%);
+    position: fixed; width: 900px; height: 900px; z-index: 1; pointer-events: none;
+    background: radial-gradient(circle, rgba(197, 179, 88, 0.06) 0%, rgba(197, 179, 88, 0) 65%);
     transform: translate(-50%, -50%);
-    mix-blend-mode: plus-lighter; /* 讓光影更具通透感 */
+    mix-blend-mode: color-dodge; /* 讓光影與石材紋理產生化學反應 */
 }
 
-/* 標題區：追求如煙霧般的輕盈 */
-header { padding: 180px 24px 120px; text-align: center; }
+/* 標題：追求極致留白與呼吸感 */
+header { padding: 200px 24px 120px; text-align: center; }
 header h1 {
     font-size: 3.5rem;
-    font-weight: 100; /* 使用最細的字重 */
-    letter-spacing: 25px;
+    font-weight: 100;
+    letter-spacing: 28px; /* 進一步拉大字距 */
     color: #FFFFFF;
-    text-shadow: 0 0 20px rgba(255,255,255,0.1); /* 微弱的文字光暈 */
+    text-shadow: 0 0 30px rgba(255,255,255,0.05); 
     margin: 0;
-    text-indent: 25px;
-}
-header .subtitle {
-    color: var(--zen-gold);
-    letter-spacing: 15px;
-    font-size: 0.8rem;
-    opacity: 0.4;
-    margin-top: 35px;
-    text-transform: uppercase;
+    text-indent: 28px;
+    opacity: 0.9;
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding-bottom: 150px; position: relative; z-index: 2; }
 
-/* 抬頭與細線：模擬石澗中的裂隙 */
+/* 抬頭與細線：增加明暗呼吸感 */
 h2 {
-    font-size: 1rem; color: var(--zen-gold); margin: 120px 0 50px; 
-    font-weight: 200; letter-spacing: 6px; display: flex; align-items: center;
-    opacity: 0.7;
+    font-size: 0.95rem; color: var(--zen-warm); margin: 120px 0 50px; 
+    font-weight: 200; letter-spacing: 8px; display: flex; align-items: center;
+    opacity: 0.5;
 }
 h2::after { 
     content: ""; flex: 1; height: 1px; 
-    background: linear-gradient(to right, rgba(197, 179, 88, 0.2), transparent); 
+    background: linear-gradient(to right, rgba(197, 179, 88, 0.15), transparent); 
     margin-left: 30px; 
 }
 
-/* 重塑黑石卡片：追求「濕潤石板」質感 */
+/* 石材卡片：強化陰影深度 */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 60px; }
 
 .card {
-    background: linear-gradient(145deg, #0F0F0F, #080808);
+    background: #0D0D0D;
     padding: 70px 50px;
-    border-radius: 2px;
-    /* 雙層邊框：一層深黑，一層極細亮邊模擬反光 */
-    border: 1px solid #151515;
-    box-shadow: 
-        20px 20px 60px #030303, 
-        -5px -5px 20px rgba(255,255,255,0.01); /* 極其微弱的高光 */
+    border: 1px solid #161616;
+    /* 增加卡片下方的深邃陰影，讓它看起來是「浮」在石澗上的 */
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.9);
     text-decoration: none; color: inherit; 
-    transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative; overflow: hidden; display: block;
 }
 
-/* 模擬卡片頂部的「濕潤反射線」 */
+/* 濕潤反射線實驗 (保持並優化) */
 .card::before {
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+    opacity: 0.6;
 }
 
 .card:hover {
-    background: #121212;
-    border-color: #252525;
-    transform: translateY(-10px);
-    box-shadow: 0 30px 70px rgba(0,0,0,0.8);
+    background: #111111;
+    border-color: #222;
+    transform: translateY(-12px) scale(1.01);
+    box-shadow: 0 40px 90px rgba(0,0,0,1);
 }
 
-.card h3 { color: #FFFFFF; font-size: 1.5rem; margin-bottom: 25px; font-weight: 300; letter-spacing: 5px; }
-.card p { color: #555555; line-height: 2.5; font-size: 0.85rem; transition: 0.8s; }
-.card:hover p { color: #888888; }
+.card h3 { color: #FFFFFF; font-size: 1.5rem; margin-bottom: 25px; font-weight: 300; letter-spacing: 6px; }
+.card p { color: #555; line-height: 2.5; font-size: 0.85rem; }
 
-/* 標籤：低對比度的高級感 */
-.category-tag { 
-    font-size: 0.65rem; padding: 3px 12px; border: 1px solid rgba(255,255,255,0.1); 
-    margin-bottom: 30px; display: inline-block; color: #444; 
-}
-
-footer { text-align: center; padding: 120px; color: #222; font-size: 0.75rem; letter-spacing: 5px; }
+footer { text-align: center; padding: 150px; color: #1A1A1A; font-size: 0.7rem; letter-spacing: 10px; }
