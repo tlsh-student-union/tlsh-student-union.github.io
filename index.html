@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>斗六高中學生會 | 官方網站</title>
+    <title>斗六高中學生會 | 禪意石澗</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home-page">
+
     <div id="cursor-glow"></div>
 
     <header>
@@ -33,38 +34,14 @@
 
         <h2>最新動態</h2>
         <div id="announcement-grid" class="grid">
-            <p>正在連線至石澗後台...</p>
+            <p>正在讀取雲端資訊...</p>
         </div>
     </div>
 
     <footer>&copy; 2026 國立斗六高級中學學生會.</footer>
 
     <script>
-        // 1. 公告讀取邏輯
-        const spreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
-        async function loadData() {
-            try {
-                const res = await fetch(spreadsheetUrl);
-                const data = await res.text();
-                const rows = data.split('\n').filter(r => r.trim() !== '').slice(1);
-                const container = document.getElementById('announcement-grid');
-                container.innerHTML = '';
-                rows.forEach(row => {
-                    const cols = row.split(',');
-                    if (cols.length >= 2) {
-                        const card = `
-                            <a href="${cols[4] || '#'}" class="card">
-                                <span class="category-tag tag-${(cols[5]||'info').trim().toLowerCase()}">[${cols[0]}] ${cols[3]}</span>
-                                <h3>${cols[1]}</h3>
-                                <p>${cols[2]}</p>
-                            </a>`;
-                        container.innerHTML += card;
-                    }
-                });
-            } catch (e) { console.error(e); }
-        }
-
-        // 2. 光影移動邏輯
+        // 滑鼠光影追蹤邏輯
         const glow = document.getElementById('cursor-glow');
         let mx = 0, my = 0, bx = 0, by = 0;
         document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
@@ -75,7 +52,30 @@
             glow.style.top = by + 'px';
             requestAnimationFrame(animate);
         }
-        animate(); loadData();
+        animate();
+
+        // 讀取公告邏輯
+        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ7BWI3HaxcFZFKNmSBirSF1d3fQ1VDFhat9xn6HgteL6eSHSAVqggtq4CMPB5YF5_0sVRl-Ij4eZm/pub?output=csv';
+        async function load() {
+            try {
+                const r = await fetch(url);
+                const d = await r.text();
+                const rows = d.split('\n').filter(r => r.trim() !== '').slice(1);
+                const container = document.getElementById('announcement-grid');
+                container.innerHTML = '';
+                rows.forEach(row => {
+                    const cols = row.split(',');
+                    if (cols.length >= 2) {
+                        container.innerHTML += `
+                            <a href="${cols[4] || '#'}" class="card">
+                                <span class="category-tag tag-${(cols[5]||'info').trim().toLowerCase()}">[${cols[0]}] ${cols[3]}</span>
+                                <h3>${cols[1]}</h3><p>${cols[2]}</p>
+                            </a>`;
+                    }
+                });
+            } catch (e) { console.error(e); }
+        }
+        load();
     </script>
 </body>
 </html>
