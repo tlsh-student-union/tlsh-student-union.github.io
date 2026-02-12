@@ -12,6 +12,12 @@ body {
     letter-spacing: 0.1em;
 }
 
+body {
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 40px 40px;
+}
+/* 加入一個側邊的專業飾條 */
+.card { border-left: 4px solid #AAA; }
 #cursor-glow {
     position: fixed; width: 800px; height: 800px; z-index: 1; pointer-events: none;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.025) 0%, transparent 60%);
