@@ -12,6 +12,12 @@ body {
     letter-spacing: 0.1em;
 }
 
+body {
+    background-image: linear-gradient(transparent 95%, rgba(197, 179, 88, 0.03) 95%);
+    background-size: 100% 40px;
+}
+/* 列表式的精緻感 */
+.archive-item { border-bottom: 1px solid #1A1A1A; }
 #cursor-glow {
     position: fixed; width: 800px; height: 800px; z-index: 1; pointer-events: none;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
