@@ -12,6 +12,12 @@ body {
     letter-spacing: 0.15em; /* 更寬的字距展現設計感 */
 }
 
+body {
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 100px 100px;
+}
 #cursor-glow {
     position: fixed; width: 600px; height: 600px; z-index: 1; pointer-events: none;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
@@ -47,6 +53,10 @@ body {
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; }
 
+
+/* 讓卡片邊緣變得銳利、高對比 */
+.card { border: 0.5px solid #333; transition: 0.3s; }
+.card:hover { border-color: #FFF; background: #FFF; color: #000; }
 /* 極簡設計卡片 */
 .card {
     background: transparent; padding: 60px 40px; border: 1px solid #1A1A1A;
